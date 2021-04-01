@@ -143,6 +143,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuizController.cs" />
     <Compile Include="DAO\Database.cs" />
+    <Compile Include="DAO\Impl\ProgressDAOImpl.cs" />
     <Compile Include="DAO\Impl\QuizDAOImpl.cs" />
     <Compile Include="DAO\Impl\TermDAOImpl.cs" />
     <Compile Include="DAO\Impl\UserDAOImpl.cs" />

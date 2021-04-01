@@ -16,7 +16,7 @@ namespace PRN_Final_Project.DAO.Impl
                 " select[User].fullName, quiz.* , amount" +
                 " from Quiz join[User] on Quiz.username = [User].username" +
                 " join Amount on Quiz.quizId = Amount.quizId " +
-                " where quizName like @key or quizDescription like @key order by createdDate desc";
+                " where quizName like @key or quizDescription like @key and access=2 order by createdDate desc";
             SqlParameter parameter = new SqlParameter("@key", SqlDbType.NVarChar);
             parameter.Value = "%" + keyword + "%";
             List<Quiz> lst = new List<Quiz>();

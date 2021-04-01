@@ -24,6 +24,25 @@ namespace PRN_Final_Project.DAO
         List<Quiz> GetQuizByUser(string username);
 
 
+        bool DeleteQuiz(int quizID);
 
+        /// <summary>
+        /// Update information about quiz include name, des and who can access
+        /// </summary>
+        /// <param name="quizId"></param>
+        /// <param name="quizName"></param>
+        /// <param name="quizDes"></param>
+        /// <param name="access"></param>
+        /// <returns></returns>
+        bool UpdateQuiz(int quizId, int quizName, int quizDes, int access);
+
+        /// <summary>
+        /// Add new quiz to database include name, des, access
+        /// </summary>
+        /// <param name="quizName"></param>
+        /// <param name="quizDes"></param>
+        /// <param name="access"></param>
+        /// <returns></returns>
+        bool AddQuiz(int username, int quizName, int quizDes, int access);
     }
 }

@@ -20,6 +20,11 @@ namespace PRN_Final_Project.DAO.Impl
             throw new NotImplementedException();
         }
 
+        public List<Term> GetLearningTerms(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Term> GetTermsByQuizID(int id)
         {
             List<Term> terms = new List<Term>();
