@@ -23,20 +23,18 @@ namespace PRN_Final_Project.DAO.Impl
 
             DataTable data = GetDataBySQL(sql, parameter);
 
-            foreach(DataRow row in data.Rows)
+            foreach (DataRow row in data.Rows)
             {
                 lst.Add(new Quiz()
                 {
                     Creator = row["fullName"].ToString(),
-                    QuizId = int.Parse( row["QuizId"].ToString()),
+                    QuizId = int.Parse(row["QuizId"].ToString()),
                     QuizName = row["QuizName"].ToString(),
                     QuizDescription = row["QuizDescription"].ToString(),
                     CreatedDate = DateTime.Parse(row["CreatedDate"].ToString()),
                     TermAmount = int.Parse(row["amount"].ToString()),
                 });
             }
-
-
             return lst;
         }
 
@@ -70,6 +68,48 @@ namespace PRN_Final_Project.DAO.Impl
             return lst;
         }
 
-        
+        public bool DeleteQuiz(int quizID)
+        {
+            string sql = "DELETE FROM[dbo].[Quiz] WHERE quizId = @quizid ";
+            SqlParameter parameter = new SqlParameter("@quizid", SqlDbType.Int);
+            parameter.Value = quizID;
+
+            return (ExecuteSQL(sql, parameter) > 0);
+        }
+
+        public bool UpdateQuiz(int quizId, int quizName, int quizDes, int access)
+        {
+            string sql = "UPDATE [dbo].[Quiz]" +
+      "[quizName] = @quizName " +
+      " ,[quizDescription] = @quizDes " +
+      " ,[createdDate] = GetDate()" +
+      ",[access] = @access" +
+      " WHERE [quizId] = @quizId ";
+            SqlParameter[] parameter = new SqlParameter[] {
+                new SqlParameter("@quizName",SqlDbType.NVarChar),
+                new SqlParameter("@quizDes",SqlDbType.NVarChar),
+                new SqlParameter("@access",SqlDbType.Int),
+                new SqlParameter("@quizId",SqlDbType.Int)
+            };
+
+            return (ExecuteSQL(sql, parameter) > 0);
+        }
+
+        public bool AddQuiz(int username, int quizName, int quizDes, int access)
+        {
+            string sql = "INSERT INTO [dbo].[Quiz] VALUES "+
+           "(@userName"+
+           ", @quizName"+
+           ", @quizDes"+
+           ", GETDATE()"+
+           ", @access)";
+            SqlParameter[] parameter = new SqlParameter[] {
+                new SqlParameter("@username",SqlDbType.VarChar),
+                new SqlParameter("@quizName",SqlDbType.NVarChar),
+                new SqlParameter("@quizDes",SqlDbType.NVarChar),
+                new SqlParameter("@access",SqlDbType.Int),
+            };
+            return (ExecuteSQL(sql, parameter) > 0);
+        }
     }
 }

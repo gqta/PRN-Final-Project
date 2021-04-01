@@ -12,12 +12,35 @@ namespace PRN_Final_Project.DAO.Impl
     {
         public bool AddTerms(int quizId, List<Term> terms)
         {
-            throw new NotImplementedException();
+            bool check = true;
+            string sql = "INSERT INTO [dbo].[QuizDetail]" +
+            " VALUES" +
+           " (@quizid" +
+           " ,@key" +
+           " ,@value)";
+            SqlParameter[] param = new SqlParameter[3];
+            for (int i = 0; i < terms.Count; i++)
+            {
+                param = new SqlParameter[] {
+                new SqlParameter("@quizid",SqlDbType.Int),
+                new SqlParameter("@key",SqlDbType.NVarChar),
+                new SqlParameter("@value",SqlDbType.NVarChar)
+                };
+                param[0].Value = quizId;
+                param[1].Value = terms[i].Key;
+                param[2].Value = terms[i].Definition;
+                if(ExecuteSQL(sql, param) <= 0) check = false;
+            }
+            return check;
         }
 
         public bool DeleteTerm(int termID)
         {
-            throw new NotImplementedException();
+            string sql = "DELETE FROM [dbo].[QuizDetail]" +
+            " WHERE termId = @termId";
+            SqlParameter parameter = new SqlParameter("termId",SqlDbType.Int);
+            parameter.Value = termID;
+            return ExecuteSQL(sql, parameter) > 0;
         }
 
         public List<Term> GetLearningTerms(int id)
@@ -51,7 +74,21 @@ namespace PRN_Final_Project.DAO.Impl
 
         public bool UpdateTerm(int termId, string key, string value)
         {
-            throw new NotImplementedException();
+            string sql = "UPDATE [dbo].[QuizDetail]"+
+        " SET"+
+        " [key] = @key"+
+        " ,[value] = @value"+
+        " WHERE termId = @termId ";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@key", SqlDbType.NVarChar),
+                new SqlParameter("@value", SqlDbType.NVarChar),
+                new SqlParameter("@termId", SqlDbType.Int)
+            };
+            parameters[0].Value = key;
+            parameters[1].Value = value;
+            parameters[2].Value = termId;
+            return ExecuteSQL(sql, parameters) > 0;
         }
     }
 }
