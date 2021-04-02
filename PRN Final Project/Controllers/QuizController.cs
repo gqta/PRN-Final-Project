@@ -45,6 +45,7 @@ namespace PRN_Final_Project.Controllers
                 List<Term> lst = ViewBag.Result;
                 Quiz quiz = new QuizDAOImpl().getQuizByQuizId(int.Parse(Request["id"]));
                 ViewBag.quiz = quiz;
+                ViewBag.user = Request.Cookies["user"];
             }
             return View();
         }
@@ -59,6 +60,7 @@ namespace PRN_Final_Project.Controllers
                 List<Term> lst = ViewBag.Result;
                 Quiz quiz = new QuizDAOImpl().getQuizByQuizId(int.Parse(Request["id"]));
                 ViewBag.quiz = quiz;
+
             }
             return View();
         }

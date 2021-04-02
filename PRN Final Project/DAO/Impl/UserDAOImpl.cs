@@ -116,6 +116,16 @@ namespace PRN_Final_Project.DAO.Impl
             parameter[3].Value = fullName;
 
             return ExecuteSQL(sql, parameter) > 0;
+            
+        }
+        public string getAccountByQuizId(int quizId)
+        {
+            string sql = "select username from quiz where quizId = @quizId";
+            SqlParameter parameter = new SqlParameter("@quizId", SqlDbType.Int);
+            parameter.Value = quizId;
+            DataTable data = GetDataBySQL(sql, parameter);
+            string account = data.Rows[0][0].ToString();
+            return account;
         }
     }
 }

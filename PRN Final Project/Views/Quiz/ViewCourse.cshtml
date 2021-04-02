@@ -45,11 +45,11 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="hero-cap">
-                                <h2>Học phần của bạn</h2>
+                                <h2>Học phần của @ViewBag.quiz.Creator</h2>
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-                                        <li class="breadcrumb-item"><a href="#">Học phần của bạn</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Học phần của @ViewBag.quiz.Creator</a></li>
                                         <li class="breadcrumb-item"><a href="#">Quiz</a></li>
                                     </ol>
                                 </nav>
@@ -87,18 +87,25 @@
                         <div class="col-sm-12 col-md-6"><h2>Thuật ngữ trong học phần(@ViewBag.Result.Count)</h2></div>
                     </div>
                     <div class="row">
-
+                        <br/>
                     </div>
                     <div class="row">
-
+                        <br />
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-11"><a style="color : #4BB236; text-align : right;" href="~/quiz/edit?id=@ViewBag.quiz.QuizId"><h5>Chỉnh Sửa</h5></a></div>
+                @{
+                    if (ViewBag.user.Value.ToString().Equals(new UserDAOImpl().getAccountByQuizId(ViewBag.quiz.QuizId)))
+                    {
+                        <div class="col-sm-12 col-md-11"><a style="color : #4BB236; text-align : right;" href="~/quiz/edit?id=@ViewBag.quiz.QuizId"><h5>Chỉnh Sửa</h5></a></div>
+                    }
+                }
+
+
                 @foreach (Term term in ViewBag.Result)
                 {
                     <div class="row quiz-term">
-                        <div class="col-sm-5 term-content rank-well">@term.Key</div>
-                        <div class="col-sm-5 term-definition">@term.Definition</div>
+                        <div class="col-sm-6 term-content rank-well">@term.Key</div>
+                        <div class="col-sm-6 term-definition">@term.Definition</div>
                     </div>
                 }
 
