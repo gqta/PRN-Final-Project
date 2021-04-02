@@ -13,8 +13,26 @@ namespace PRN_Final_Project.Controllers
         // GET: Quiz
         public ActionResult Index()
         {
+            
+
             return View();
         }
+
+        public ActionResult Course()
+        {
+            ViewBag.Result = new List<Quiz>();
+
+
+                
+            string username = Request.Cookies["user"].Value;
+
+            ViewBag.Result = new QuizDAOImpl().GetQuizByUser(username);
+
+
+            return View();
+
+        }
+      
 
         public ActionResult Search()
         {

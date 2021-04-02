@@ -18,5 +18,7 @@ namespace PRN_Final_Project.Controllers
         {
             return Json(new QuizDAOImpl().Search("VNI"));
         }
+
+
     }
 }

@@ -26,6 +26,7 @@ namespace PRN_Final_Project.Controllers
             if (userDao.Login(username, password))
             {
                 Response.Cookies.Add(new HttpCookie("user", username));
+                Request.Cookies.Add(new HttpCookie("user", username));
                 return Redirect("/");
             }
             else

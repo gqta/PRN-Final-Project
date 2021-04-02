@@ -24,6 +24,11 @@ namespace PRN_Final_Project
                 url: "quiz/search",
                 defaults: new { controller = "Quiz", action = "Search", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "Course",
+                url: "quiz/course",
+                defaults: new { controller = "Quiz", action = "Course", id = UrlParameter.Optional }
+            );
 
             routes.MapRoute(
                 name: "Login",
