@@ -115,33 +115,33 @@
                     <div class="col-sm-12 col-md-2">
 
                         @*<form action="search.html" class="quiz-search-form">
-                <input type="text" name="Search" placeholder="Search courses.." class="quiz-search-field">
-                <div class="search-icon quiz-search-button">
-                    <button type="submit"><i class="ti-search"></i></button>
+                                <input type="text" name="Search" placeholder="Search courses.." class="quiz-search-field">
+                                <div class="search-icon quiz-search-button">
+                                    <button type="submit"><i class="ti-search"></i></button>
 
-                </div>
-            </form>
-            <div class="row quiz-sort-Title">
-                <h4><i class="fas fa-list"></i> List By</h4>
-            </div>
-            <div class="row">
-                <table class="quiz-table-sort-by">
+                                </div>
+                            </form>
+                            <div class="row quiz-sort-Title">
+                                <h4><i class="fas fa-list"></i> List By</h4>
+                            </div>
+                            <div class="row">
+                                <table class="quiz-table-sort-by">
 
-                    <tr>
-                        <td><input type="checkbox" name="sortByDay" id="" value="nearest"></td>
-                        <td><label for="">Gần đây nhất</label></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="sortByRate" id="" value="rate"></td>
-                        <td><label for="">Đánh Giá</label></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="sortByRate" id="" value="view"></td>
-                        <td><label for="">Lượt truy cập</label></td>
-                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" name="sortByDay" id="" value="nearest"></td>
+                                        <td><label for="">Gần đây nhất</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" name="sortByRate" id="" value="rate"></td>
+                                        <td><label for="">Đánh Giá</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" name="sortByRate" id="" value="view"></td>
+                                        <td><label for="">Lượt truy cập</label></td>
+                                    </tr>
 
-                </table>
-            </div>*@
+                                </table>
+                            </div>*@
 
                     </div>
                     <div class="col-sm-12 col-md-8">
@@ -195,32 +195,8 @@
         </section>
 
     </main>
-    <footer>
-        <div class="footer-area ">
-            <div class="footer-wrapper ">
 
-                <div class="footer-bottom-area">
-                    <div class="container">
-                        <div class="footer-border">
-                            <div class="row d-flex align-items-center">
-                                <div class="col-xl-12 ">
-                                    <div class="footer-copy-right text-center">
-                                        <p>
-                                            Copyright &copy;
-                                            <script>document.write(new Date().getFullYear());</script> All rights
-                                            reserved | This template is made with <i class="fa fa-heart color-danger"
-                                                                                     aria-hidden="true"></i> by <a href="https://colorlib.com/"
-                                                                                                                   target="_blank" rel="nofollow noopener">Colorlib</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @Html.Partial("~/Views/Shared/_Footer.cshtml")
 
     <div id="back-top">
         <a class="wrapper" title="Go to Top" href="#">

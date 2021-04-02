@@ -1,5 +1,6 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿
+@{
+    ViewBag.Title = "Error Page";
 }
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -11,7 +12,6 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="/Assets/img/icon/favicon.png">
-
     <link rel="stylesheet" href="/Assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/Assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/Assets/css/slicknav.css">
@@ -27,43 +27,17 @@
 </head>
 
 <body>
-   
     @Html.Partial("~/Views/Shared/_Header.cshtml")
     <main>
-
-        <div class="slider-area slider-height">
-            <div class="slider-active">
-
-                <div class="single-slider">
-                    <div class="slider-cap-wrapper">
-                        <div class="hero-caption">
-                            <h1 data-animation="fadeInUp" data-delay=".2s">
-                                Learn new skills online with top educators
-                            </h1>
-                            <p data-animation="fadeInUp" data-delay=".6s">
-                                Learn 100% online with world-class
-                                universities<br> and industry experts.
-                            </p>
-
-                            <form action="quiz/search" class="search-box">
-                                <div class="input-form">
-                                    <input type="text" name="keyword" placeholder="What do you want to learn?">
-                                    <a class="search-form" href="#"><i class="ti-search"></i></a>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="hero-img position-relative">
-                            <img src="/Assets/img/hero/h1_hero1.jpg" alt="" data-animation="fadeInRight"
-                                 data-transition-duration="5s">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
+        <h1>
+            @ViewBag.ErrorCode           
+        </h1>
+        <h3>
+            @ViewBag.ErrorMessage
+        </h3>
     </main>
 
+    @Html.Partial("~/Views/Shared/_Footer.cshtml")
 
     <script src="/Assets/js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="/Assets/js/vendor/jquery-1.12.4.min.js"></script>
