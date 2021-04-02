@@ -41,21 +41,25 @@
                     @if (ViewBag.ErrorMessage != null)
                     {
                         <p class="text-danger">@ViewBag.ErrorMessage </p>}
-                <div class="input-box">
-                    <div class="single-input-fields">
-                        <label>Old Passworld</label>
-                        <input type="password" id="login" name="oldpassword" placeholder="Old Password" autofocus="autofocus" />
-                    </div>
 
-                    <div class="single-input-fields">
-                        <label>New Password</label>
-                        <input type="password" name="newpassword" placeholder="Enter Password" required>
+                   
+                   
+                    <div class="input-box">
+
+                        <div class="single-input-fields">
+                            <label>Old Passworld</label>
+                            <input type="password" id="oldpassword" name="oldpassword" placeholder="Old Password" autofocus="autofocus" />
+                        </div>
+
+                        <div class="single-input-fields">
+                            <label>New Password</label>
+                            <input type="password" id="newpassword" name="newpassword" placeholder="Enter Password" required>
+                        </div>
+                        <div class="single-input-fields">
+                            <label>New Confirm Password</label>
+                            <input type="password" id="repassword" name="repassword" placeholder="Confirm Password" required>
+                        </div>
                     </div>
-                    <div class="single-input-fields">
-                        <label>New Confirm Password</label>
-                        <input type="password" name="newpassword" placeholder="Confirm Password" required>
-                    </div>
-                </div>
 
                     <div class="login-footer">
 
@@ -106,6 +110,7 @@
 <!-- Mirrored from preview.colorlib.com/theme/onedu/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 28 Mar 2021 14:05:07 GMT -->
 
 </html>
+
 
 
 

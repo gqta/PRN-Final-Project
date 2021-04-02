@@ -32,7 +32,7 @@ namespace PRN_Final_Project
             routes.MapRoute(
               name: "Forget Password",
               url: "user/forgotpassword",
-              defaults: new { controller = "User", action = "ForgotPassword", id = UrlParameter.Optional }
+              defaults: new { controller = "User", action = "ForgotPassword" }
           );
             routes.MapRoute(
                 name: "Login",
@@ -52,13 +52,18 @@ namespace PRN_Final_Project
             routes.MapRoute(
               name: "ChangePassword",
               url: "changepassword",
-              defaults: new { controller = "User", action = "ChangePassword" }
+              defaults: new { controller = "User", action = "ChangePass" }
           );
 
             routes.MapRoute(
                 name: "Register",
                 url: "register",
                 defaults: new { controller = "User", action = "Register" }
+            );
+            routes.MapRoute(
+                name: "ActivationMail",
+                url: "activation",
+                defaults: new { controller = "User", action = "ActivationMail" }
             );
         }
     }

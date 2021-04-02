@@ -1,5 +1,6 @@
 ﻿using PRN_Final_Project.DAO;
 using PRN_Final_Project.DAO.Impl;
+using PRN_Final_Project.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,20 @@ namespace PRN_Final_Project.Controllers
             string username = Request["username"];
             string password = Request["password"];
             UserDAO userDao = new UserDAOImpl();
+          
 
             if (userDao.Login(username, password))
-            {
-                Response.Cookies.Add(new HttpCookie("user", username));
-                Request.Cookies.Add(new HttpCookie("user", username));
+            { 
+                if( userDao.isActive(username))
+                {
+Response.Cookies.Add(new HttpCookie("user", username));
+                }
+
+                else
+                {
+                    return Redirect("/activation");
+                }
+                
                 return Redirect("/");
             }
             else
@@ -62,7 +72,7 @@ namespace PRN_Final_Project.Controllers
             string password = Request["password"];
             string email = Request["email"];
             string fullname = Request["fullname"];
-
+          
             if (Response.Cookies.Get("user").Value != null)
             {
                 return Redirect("/");
@@ -72,11 +82,18 @@ namespace PRN_Final_Project.Controllers
                 try
                 {
                     UserDAO userDao = new UserDAOImpl();
-
-                    if (userDao.Register(username, password, email, fullname))
+                    string codeActive = userDao.getRandomPass();
+                    if (userDao.Register(username, password, email, fullname,codeActive))
                     {
-                        Response.Cookies.Add(new HttpCookie("user", username));
-                        return Redirect("/");
+
+                        //Response.Cookies.Add(new HttpCookie("user", username));
+
+                        string host = Request.Url.Host +":"+Request.Url.Port;
+                        
+
+                        MailHelper mail = new MailHelper();
+                        mail.SendMail(email, "Xác nhận tài khoản", "Bấm vào link để xác nhận tài khoản: " + "https://"+ host+"/activation?user="+username+"&code="+codeActive);
+                        return Redirect("/activation");
                     }
                     else
                     {
@@ -85,7 +102,7 @@ namespace PRN_Final_Project.Controllers
                 }
                 catch (Exception ex)
                 {
-                    ViewBag.ErrorMessage = "Username or email is existed";
+                    ViewBag.ErrorMessage = "Username or email is existed"+ex.Message;
                     return View();
                 }
             }
@@ -109,6 +126,12 @@ namespace PRN_Final_Project.Controllers
 
             if (userDao.ForgotPassword(username,email) != null)
             {
+                Session["usernamee"] = username;
+             
+                string newpass = userDao.ForgotPassword(username, email);
+                MailHelper mail = new MailHelper();
+                mail.SendMail(email, "Mật khẩu OneDu của bạn đã được đổi", "Mật khẩu mới của bạn là: " + newpass);
+
                 return Redirect("ChangePassword");
 
             }
@@ -116,31 +139,64 @@ namespace PRN_Final_Project.Controllers
 
         }
         
+       
         [HttpGet]
-        public ActionResult ChangePassword()
+        public ActionResult ChangePass()
         {
+            return View();
+        }
 
-         
+        [HttpPost]
+        public ActionResult ChangePass(params string[] prs)
+        {
+            string username = "";
+            if (Request.Cookies["user"] == null) { username = Session["usernamee"].ToString(); }
+            else
+            {
+                username = Request.Cookies["user"].Value.ToString();
+            }
+
+
+
+
+            string oldpassword = Request["oldpassword"];
+            string newpassword = Request["newpassword"];
+          
+
+            UserDAO user = new UserDAOImpl();
+
+            bool rs = user.ChangePassword(username, oldpassword, newpassword);
+            if (rs)
+            {
+                return Redirect("/");
+            }
+            else
+            {
+                return View();
+            }
+
+        }
+        [HttpGet]
+        public ActionResult ActivationMail()
+        {
+            UserDAO user = new UserDAOImpl();
+            string username = Request["user"]==null?"": Request["user"];
+            string code = Request["code"]==null?"": Request["code"];
+            
+            if(user.setActive(username, code)) {
+                Response.Cookies.Add(new HttpCookie("user", username));
+                return Redirect("/");
+
+            }
+            
+
+
+
+            ViewData["active"] = string.IsNullOrEmpty(username)?null:"Bạn chưa Active thành công!" ;
             return View();
 
         }
-        [HttpPost]
-        public ActionResult ChangePassword(string oldpassword, string newpassword)
-        {
-            string username = Request.Cookies["user"].Value;
-            UserDAO user = new UserDAOImpl();
-           
-           bool rs =  user.ChangePassword(username, oldpassword, newpassword);
-
-            if (rs)
-            {
-                ViewData["chgpass"] = "Change password succesfully";
-                return Redirect("~/");
-            }
-
-            return Json(rs,JsonRequestBehavior.AllowGet);
-
-        }
+        
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using PRN_Final_Project.DAO.Impl;
+using PRN_Final_Project.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace PRN_Final_Project.Controllers
     {
         public ActionResult Index()
         {
+            
             return View();
         }
 
