@@ -10,11 +10,11 @@ function getAddField(index) {
     </div>
     <div class="row">
         <div class="col-sm-12 col-md-6 quiz-add-input-field">
-            <input type="text" name="" placeholder="" value="">
+            <input type="text" name="key" placeholder="" value="">
             <label for="">Thuật ngữ</label>
         </div>
         <div class="col-sm-12 col-md-6 quiz-add-input-field">
-            <input type="text" name="" placeholder="" value="">
+            <input type="text" name="value" placeholder="" value="">
             <label for="">Định nghĩa</label>
         </div>
     </div>

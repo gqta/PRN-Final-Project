@@ -313,14 +313,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Quiz\Search.cshtml" />
-    <Content Include="Views\_Layout.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Quiz\Course.cshtml" />
-    <Content Include="Views\User\ForgotPassword.cshtml" />
-    <Content Include="Views\User\ChangePassword.cshtml" />
+
+    <Content Include="Views\Quiz\Add.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

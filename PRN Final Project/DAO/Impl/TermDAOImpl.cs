@@ -10,35 +10,42 @@ namespace PRN_Final_Project.DAO.Impl
 {
     public class TermDAOImpl : Database, TermDAO
     {
-        public bool AddTerms(int quizId, List<Term> terms)
+        public int AddTerms(int quizId, List<Term> terms)
         {
-            bool check = true;
+            int result = 0;
+            
+            for (int i = 0; i < terms.Count; i++)
+            {
+                result += AddTerm(quizId,terms[i]);              
+            }
+            return result;
+        }
+
+        public int AddTerm(int quizId, Term terms)
+        {
             string sql = "INSERT INTO [dbo].[QuizDetail]" +
             " VALUES" +
            " (@quizid" +
            " ,@key" +
            " ,@value)";
             SqlParameter[] param = new SqlParameter[3];
-            for (int i = 0; i < terms.Count; i++)
-            {
-                param = new SqlParameter[] {
+            param = new SqlParameter[] {
                 new SqlParameter("@quizid",SqlDbType.Int),
                 new SqlParameter("@key",SqlDbType.NVarChar),
                 new SqlParameter("@value",SqlDbType.NVarChar)
                 };
-                param[0].Value = quizId;
-                param[1].Value = terms[i].Key;
-                param[2].Value = terms[i].Definition;
-                if(ExecuteSQL(sql, param) <= 0) check = false;
-            }
-            return check;
+            param[0].Value = quizId;
+            param[1].Value = terms.Key;
+            param[2].Value = terms.Definition;
+            return ExecuteSQL(sql, param);
+
         }
 
         public bool DeleteTerm(int termID)
         {
             string sql = "DELETE FROM [dbo].[QuizDetail]" +
             " WHERE termId = @termId";
-            SqlParameter parameter = new SqlParameter("termId",SqlDbType.Int);
+            SqlParameter parameter = new SqlParameter("termId", SqlDbType.Int);
             parameter.Value = termID;
             return ExecuteSQL(sql, parameter) > 0;
         }
@@ -74,10 +81,10 @@ namespace PRN_Final_Project.DAO.Impl
 
         public bool UpdateTerm(int termId, string key, string value)
         {
-            string sql = "UPDATE [dbo].[QuizDetail]"+
-        " SET"+
-        " [key] = @key"+
-        " ,[value] = @value"+
+            string sql = "UPDATE [dbo].[QuizDetail]" +
+        " SET" +
+        " [key] = @key" +
+        " ,[value] = @value" +
         " WHERE termId = @termId ";
             SqlParameter[] parameters = new SqlParameter[]
             {
