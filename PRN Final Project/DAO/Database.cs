@@ -112,5 +112,14 @@ namespace PRN_Final_Project.DAO
                 return sb.ToString();
             }
         }
+        public int ExecuteSQL(string sql)
+        {
+
+            SqlCommand cmd = new SqlCommand(sql, GetConnection());
+            cmd.Connection.Open();
+            int result = cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
+            return result;
+        }
     }
 }

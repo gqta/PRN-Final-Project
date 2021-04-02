@@ -2384,7 +2384,26 @@ hr {
     border: 0;
     overflow: hidden
 }
-
+.btn-add-card {
+    background: #5A4E8C;
+    font-family: "Jost", sans-serif;
+    text-transform: inherit !important;
+    padding: 30px 35px;
+    color: #fff !important;
+    display: inline-block;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    border-radius: 4px;
+    line-height: 1;
+    line-height: 0;
+    cursor: pointer;
+    -moz-user-select: none;
+    transition: color 0.4s linear;
+    position: relative;
+    z-index: 1;
+    border: 0;
+    overflow: hidden
+}
 .btn::before {
     content: "";
     position: absolute;

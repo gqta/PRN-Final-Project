@@ -1,0 +1,231 @@
+﻿@using PRN_Final_Project.Models
+@{
+    ViewBag.Title = "Course";
+}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<!-- Mirrored from preview.colorlib.com/theme/onedu/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 28 Mar 2021 14:04:04 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Education | Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Assets/img/icon/icon.png">
+
+    <link rel="stylesheet" href="~/Assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Assets/css/slicknav.css">
+    <link rel="stylesheet" href="~/Assets/css/flaticon.css">
+    <link rel="stylesheet" href="~/Assets/css/animate.min.css">
+    <link rel="stylesheet" href="~/Assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="~/Assets/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Assets/css/slick.css">
+    <link rel="stylesheet" href="~/Assets/css/nice-select.css">
+    <link rel="stylesheet" href="~/Assets/css/style.css">
+    <link rel="stylesheet" href="~/Assets/css/main.css">
+</head>
+
+<body>
+    @Html.Partial("~/Views/Shared/_Header.cshtml")
+    <main>
+
+        <div class="slider-area slider-height">
+            <div class="slider-active">
+
+                <div class="single-slider">
+                    <div class="slider-cap-wrapper">
+                        <div class="hero-caption">
+                            <h1 data-animation="fadeInUp" data-delay=".2s">
+                                Learn new skills online with top educators
+                            </h1>
+                            <p data-animation="fadeInUp" data-delay=".6s">
+                                Learn 100% online with world-class
+                                universities<br> and industry experts.
+                            </p>
+
+                            <form action="#" class="search-box">
+                                <div class="input-form">
+                                    <input type="text" placeholder="What do you want to learn?">
+                                    <a class="search-form" href="#"><i class="ti-search"></i></a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="hero-img position-relative">
+                            <img src="~/Assets/img/hero/h1_hero1.jpg" alt="" data-animation="fadeInRight"
+                                 data-transition-duration="5s">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <section class="popular-directorya-area section-padding fix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="section-tittle text-center mb-40">
+                            <h2>--- Đã học gần đây ---</h2>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="directory-active">
+                    @if (ViewBag.Result.Count > 0)
+                    {
+                        foreach (Quiz course in ViewBag.Result)
+                        {
+
+                            <div class="properties pb-20 quiz-card">
+                                <div class="properties-card">
+                                    <div class="properties-caption">
+                                        <a href="quiz.html">
+                                            <h3>
+                                                <a href="quiz.html">@course.QuizName</a>
+                                            </h3>
+                                        </a>
+
+                                    </div>
+                                    <br>
+                                    <div class="properties-caption">
+                                        <h3>
+                                            <p>@course.TermAmount</p>
+                                        </h3>
+                                        <p>by @course.Creator</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>       
+        </section>
+
+
+
+
+        <section class="popular-directorya-area section-padding fix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="section-tittle text-center mb-40">
+                            <h2>--- Học phần của bạn ---</h2>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="directory-active">
+                    @if (ViewBag.Result.Count > 0)
+                    {
+                        foreach (Quiz course in ViewBag.Result)
+                        {
+                            <div class="properties pb-20 quiz-card">
+                                <div class="properties-card">
+                                    <div class="properties-caption">
+                                        <a href="quiz.html">
+                                            <h3>
+                                                <a href="quiz.html">@course.QuizName</a>
+                                            </h3>
+                                        </a>
+
+                                    </div>
+                                    <br>
+                                    <div class="properties-caption">
+                                        <h3>
+                                            <p>@course.TermAmount</p>
+                                        </h3>
+                                        <p>by @course.Creator</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+               
+        </section>
+
+    </main>
+    <footer>
+        <div class="footer-area ">
+            <div class="footer-wrapper ">
+
+                <div class="footer-bottom-area">
+                    <div class="container">
+                        <div class="footer-border">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-xl-12 ">
+                                    <div class="footer-copy-right text-center">
+                                        <p>
+                                            Copyright &copy;
+                                            <script>document.write(new Date().getFullYear());</script> All rights
+                                            reserved | This template is made with <i class="fa fa-heart color-danger"
+                                                                                     aria-hidden="true"></i> by <a href="https://colorlib.com/"
+                                                                                                                   target="_blank" rel="nofollow noopener">Colorlib</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="back-top">
+        <a class="wrapper" title="Go to Top" href="#">
+            <div class="arrows-container">
+                <div class="arrow arrow-one">
+                </div>
+                <div class="arrow arrow-two">
+                </div>
+            </div>
+        </a>
+    </div>
+
+
+    <script src="~/Assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="~/Assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Assets/js/popper.min.js"></script>
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+
+    <script src="~/Assets/js/owl.carousel.min.js"></script>
+    <script src="~/Assets/js/slick.min.js"></script>
+    <script src="~/Assets/js/jquery.slicknav.min.js"></script>
+
+    <script src="~/Assets/js/wow.min.js"></script>
+    <script src="~/Assets/js/jquery.magnific-popup.js"></script>
+    <script src="~/Assets/js/jquery.nice-select.min.js"></script>
+    <script src="~/Assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Assets/js/waypoints.min.js"></script>
+
+    <script src="~/Assets/js/contact.js"></script>
+    <script src="~/Assets/js/jquery.form.js"></script>
+    <script src="~/Assets/js/jquery.validate.min.js"></script>
+    <script src="~/Assets/js/mail-script.js"></script>
+    <script src="~/Assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <script src="~/Assets/js/plugins.js"></script>
+    <script src="~/Assets/js/main.js"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-23581568-13');
+    </script>
+</body>
+
+<!-- Mirrored from preview.colorlib.com/theme/onedu/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 28 Mar 2021 14:04:27 GMT -->
+
+</html>

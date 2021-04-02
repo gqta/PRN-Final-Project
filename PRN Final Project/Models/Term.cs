@@ -16,7 +16,11 @@ namespace PRN_Final_Project.Models
         {
 
         }
-
+        public Term(string key, string definition)
+        {
+            this.key = key;
+            this.definition = definition;
+        }
         public Term( int termID, string key, string definition)
         {
 
