@@ -24,7 +24,16 @@ namespace PRN_Final_Project
                 url: "quiz/search",
                 defaults: new { controller = "Quiz", action = "Search", id = UrlParameter.Optional }
             );
-
+            routes.MapRoute(
+                name: "Course",
+                url: "quiz/course",
+                defaults: new { controller = "Quiz", action = "Course", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+              name: "Forget Password",
+              url: "user/forgotpassword",
+              defaults: new { controller = "User", action = "ForgotPassword", id = UrlParameter.Optional }
+          );
             routes.MapRoute(
                 name: "Login",
                 url: "login",
@@ -35,6 +44,16 @@ namespace PRN_Final_Project
                 url: "logout",
                 defaults: new { controller = "User", action = "Logout" }
             );
+            routes.MapRoute(
+                name: "ForgotPassword",
+                url: "forgotpassword",
+                defaults: new { controller = "User", action = "ForgotPassword" }
+            );
+            routes.MapRoute(
+              name: "ChangePassword",
+              url: "changepassword",
+              defaults: new { controller = "User", action = "ChangePassword" }
+          );
 
             routes.MapRoute(
                 name: "Register",

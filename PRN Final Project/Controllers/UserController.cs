@@ -26,6 +26,7 @@ namespace PRN_Final_Project.Controllers
             if (userDao.Login(username, password))
             {
                 Response.Cookies.Add(new HttpCookie("user", username));
+                Request.Cookies.Add(new HttpCookie("user", username));
                 return Redirect("/");
             }
             else
@@ -35,6 +36,7 @@ namespace PRN_Final_Project.Controllers
             }
 
         }
+
 
         [HttpGet]
         public ActionResult Logout()
@@ -90,5 +92,55 @@ namespace PRN_Final_Project.Controllers
 
 
         }
+
+        public ActionResult ForgotPassword()
+        {
+
+            
+            return View();
+
+        }
+        [HttpPost]
+        public ActionResult ForgotPassword(string username, string email)
+        {
+
+
+            UserDAO userDao = new UserDAOImpl();
+
+            if (userDao.ForgotPassword(username,email) != null)
+            {
+                return Redirect("ChangePassword");
+
+            }
+            return View();
+
+        }
+        
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+
+         
+            return View();
+
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(string oldpassword, string newpassword)
+        {
+            string username = Request.Cookies["user"].Value;
+            UserDAO user = new UserDAOImpl();
+           
+           bool rs =  user.ChangePassword(username, oldpassword, newpassword);
+
+            if (rs)
+            {
+                ViewData["chgpass"] = "Change password succesfully";
+                return Redirect("~/");
+            }
+
+            return Json(rs,JsonRequestBehavior.AllowGet);
+
+        }
+
     }
 }
