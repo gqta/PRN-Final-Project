@@ -1,6 +1,7 @@
 ﻿using PRN_Final_Project.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace PRN_Final_Project.DAO
         /// <returns>List of quiz</returns>
         List<Quiz> GetQuizByUser(string username);
 
-
+       
         bool DeleteQuiz(int quizID);
 
         /// <summary>

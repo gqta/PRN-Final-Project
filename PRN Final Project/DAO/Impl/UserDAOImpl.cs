@@ -9,23 +9,28 @@ namespace PRN_Final_Project.DAO.Impl
 {
     public class UserDAOImpl : Database, UserDAO
     {
-        public bool ChangePassword(string username, string password)
+       
+        public bool ChangePassword(string username,string oldpass, string password)
         {
 
-            string sql = "UPDATE [dbo].[User] SET[password] = @pass WHERE[username] = @user";
+            string sql = "UPDATE [dbo].[User] SET[password] = @pass WHERE[username] = @user and [password] = @oldpass";
 
             string md5Password = CreateMD5(username.ToLower() + "_" + password);
+            string md5Oldpass = CreateMD5(username.ToLower() + "_" + oldpass);
 
             SqlParameter[] parameter = new SqlParameter[]
             {
                 new SqlParameter("@user", SqlDbType.VarChar),
+                new SqlParameter("@oldpass", SqlDbType.VarChar),
                 new SqlParameter("@pass", SqlDbType.VarChar),
             };
 
             parameter[0].Value = username;
-            parameter[1].Value = md5Password;
 
-            return GetAmountRecord(sql, parameter) > 0;
+            parameter[1].Value = md5Oldpass;
+            parameter[2].Value = md5Password;
+
+            return ExecuteSQL(sql, parameter) > 0;
         }
 
         public string ForgotPassword(string username, string email)
@@ -36,7 +41,7 @@ namespace PRN_Final_Project.DAO.Impl
             SqlParameter[] parameter = new SqlParameter[]
             {
                 new SqlParameter("@user", SqlDbType.VarChar),
-                new SqlParameter("@pass", SqlDbType.VarChar),
+                new SqlParameter("@email", SqlDbType.VarChar),
             };
 
             parameter[0].Value = username;
@@ -44,7 +49,7 @@ namespace PRN_Final_Project.DAO.Impl
 
             string randomPass = getRandomPass();
 
-            if(GetAmountRecord(sql, parameter) > 0 && ChangePassword(username, randomPass))
+            if(GetDataBySQL(sql, parameter).Rows.Count > 0 && ChangePassword(username, randomPass))
             {
                  return randomPass;
             
@@ -76,7 +81,7 @@ namespace PRN_Final_Project.DAO.Impl
         {
             string sql = "select * from [User] where username = @user and password = @pass";
 
-            //string md5Password = CreateMD5(username.ToLower() + "_"+password);
+            string md5Password = CreateMD5(username.ToLower() + "_" + password);
 
             SqlParameter[] parameter = new SqlParameter[]
             {
@@ -85,7 +90,7 @@ namespace PRN_Final_Project.DAO.Impl
             };
 
             parameter[0].Value = username;
-            parameter[1].Value = password;
+            parameter[1].Value = md5Password;
 
             return GetDataBySQL(sql, parameter).Rows.Count > 0;
         }
@@ -110,7 +115,7 @@ namespace PRN_Final_Project.DAO.Impl
             parameter[2].Value = email;
             parameter[3].Value = fullName;
 
-            return GetAmountRecord(sql, parameter) > 0;
+            return ExecuteSQL(sql, parameter) > 0;
         }
     }
 }

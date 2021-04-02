@@ -21,31 +21,40 @@
                         <nav>
                             <ul id="navigation">
                                 <li><a href="/">Trang chủ</a></li>
-                                <li><a href="/Quiz/Course">Thư viện của bạn</a></li>
+
 
                                 <li>
                                     <a href="/Quiz/Add" class="quiz-add"> Học phần mới </a>
                                 </li>
+
                                 @if (Request.Cookies["user"] == null || String.IsNullOrEmpty(Request.Cookies["user"].Value))
                                 {
-                    <li>
-                        <a href="~/login" class="btn header-btn2">Sign In</a>
-                    </li>
+                                    <li>
+                                        <a href="~/login" class="btn header-btn2">Sign In</a>
+                                    </li>
                                     <li>
                                         <a href="~/register" class="btn header-btn2">Sign Up</a>
                                     </li>
- }
+                                }
                                 else
                                 {
-                    <li>
-                        Chào, @Request.Cookies["user"].Value.ToString()
+                                    <li><a href="/Quiz/Course">Thư viện của bạn</a></li>
+                                    <li>
+                                        <a href="/Quiz/Add" class="quiz-add"> Học phần mới </a>
+                                    </li>
+                                    <li>
+                                        Chào, @Request.Cookies["user"].Value.ToString()
 
-                    </li>
+                                    </li>
+                                    <li>
+
+                                        <a href="~/changepassword" class="btn header-btn2">Change Password</a>
+                                    </li>
                                     <li>
 
                                         <a href="~/logout" class="btn header-btn2">Logout</a>
                                     </li>
-}
+                                }
                             </ul>
                         </nav>
                     </div>

@@ -26,6 +26,7 @@ namespace PRN_Final_Project.Controllers
             if (userDao.Login(username, password))
             {
                 Response.Cookies.Add(new HttpCookie("user", username));
+                Request.Cookies.Add(new HttpCookie("user", username));
                 return Redirect("/");
             }
             else
@@ -36,9 +37,11 @@ namespace PRN_Final_Project.Controllers
 
         }
 
+
         [HttpGet]
         public ActionResult Logout()
         {
+
             if (Response.Cookies.Get("user").Value != null)
             {
                 Response.Cookies.Remove("user");
@@ -53,8 +56,13 @@ namespace PRN_Final_Project.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(string username, string password, string email, string fullname)
+        public ActionResult Register(params string[] prs)
         {
+            string username = Request["username"];
+            string password = Request["password"];
+            string email = Request["email"];
+            string fullname = Request["fullname"];
+
             if (Response.Cookies.Get("user").Value != null)
             {
                 return Redirect("/");
@@ -77,12 +85,62 @@ namespace PRN_Final_Project.Controllers
                 }
                 catch (Exception ex)
                 {
-                    ViewBag["ErrorMessage"] = "Username is Existed!";
+                    ViewBag.ErrorMessage = "Username or email is existed";
                     return View();
                 }
             }
 
 
         }
+
+        public ActionResult ForgotPassword()
+        {
+
+            
+            return View();
+
+        }
+        [HttpPost]
+        public ActionResult ForgotPassword(string username, string email)
+        {
+
+
+            UserDAO userDao = new UserDAOImpl();
+
+            if (userDao.ForgotPassword(username,email) != null)
+            {
+                return Redirect("ChangePassword");
+
+            }
+            return View();
+
+        }
+        
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+
+         
+            return View();
+
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(string oldpassword, string newpassword)
+        {
+            string username = Request.Cookies["user"].Value;
+            UserDAO user = new UserDAOImpl();
+           
+           bool rs =  user.ChangePassword(username, oldpassword, newpassword);
+
+            if (rs)
+            {
+                ViewData["chgpass"] = "Change password succesfully";
+                return Redirect("~/");
+            }
+
+            return Json(rs,JsonRequestBehavior.AllowGet);
+
+        }
+
     }
 }

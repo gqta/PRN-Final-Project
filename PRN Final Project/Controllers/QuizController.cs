@@ -1,5 +1,7 @@
+
 ﻿using PRN_Final_Project.DAO;
 using PRN_Final_Project.DAO.Impl;
+
 using PRN_Final_Project.Models;
 using System;
 using System.Collections;
@@ -15,19 +17,38 @@ namespace PRN_Final_Project.Controllers
         // GET: Quiz
         public ActionResult Index()
         {
+            
+
             return View();
         }
+
+        public ActionResult Course()
+        {
+            ViewBag.Result = new List<Quiz>();
+
+
+                
+            string username = Request.Cookies["user"].Value;
+
+            ViewBag.Result = new QuizDAOImpl().GetQuizByUser(username);
+
+
+            return View();
+
+        }
+      
 
         public ActionResult Search()
         {
             ViewBag.Result = new List<Quiz>();
+
             if (!String.IsNullOrEmpty(Request["keyword"]))
             {
                 ViewBag.Result = new QuizDAOImpl().Search(Request["keyword"]);
-                //return Json(new QuizDAOImpl().Search(Request["keyword"]), JsonRequestBehavior.AllowGet);
             }
             return View();
         }
+
         [HttpGet]
         public ActionResult Add()
         {
@@ -66,5 +87,6 @@ namespace PRN_Final_Project.Controllers
                 return View();
             }
         }
+
     }
 }

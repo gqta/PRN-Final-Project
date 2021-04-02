@@ -32,15 +32,14 @@
 
         <div class="register-form-area">
 
-            <form action="~/register" method="post">
+            <form action="~/register" method="post" onsubmit="precheck(this)">
                 <div class="register-form text-center">
 
                     <div class="register-heading">
                         <span>Sign Up</span>
                         <p>Create your account to get full access</p>
-                        @if (ViewData["message"] != null)
-                        {
-                            <p class="text-warning">@ViewData["message"].ToString()</p>}
+
+                    <p class="text-danger">@ViewBag.ErrorMessage </p>
                     </div>
 
                     <div class="input-box">

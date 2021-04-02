@@ -5,6 +5,7 @@ using System.Web;
 
 namespace PRN_Final_Project.Models
 {
+    [Serializable]
     public class Term
     {
         private int termID;
