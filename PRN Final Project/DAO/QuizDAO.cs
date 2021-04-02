@@ -43,6 +43,6 @@ namespace PRN_Final_Project.DAO
         /// <param name="quizDes"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        bool AddQuiz(int username, int quizName, int quizDes, int access);
+        int AddQuiz(string username, string quizName, string quizDes, int access);
     }
 }

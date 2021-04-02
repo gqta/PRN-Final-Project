@@ -41,6 +41,11 @@ namespace PRN_Final_Project
                 url: "register",
                 defaults: new { controller = "User", action = "Register" }
             );
+            routes.MapRoute(
+                name: "AddQuiz",
+                url: "quiz/add",
+                defaults: new { controller = "Quiz", action = "Add", id = UrlParameter.Optional }
+            );
         }
     }
 }

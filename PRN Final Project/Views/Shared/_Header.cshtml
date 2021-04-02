@@ -26,7 +26,7 @@
                                 <li>
                                     <a href="/Quiz/Add" class="quiz-add"> Học phần mới </a>
                                 </li>
-                                @if ( String.IsNullOrEmpty(Request.Cookies["user"].Value))
+                                @if (Request.Cookies["user"] == null || String.IsNullOrEmpty(Request.Cookies["user"].Value))
                                 {
                     <li>
                         <a href="~/login" class="btn header-btn2">Sign In</a>
