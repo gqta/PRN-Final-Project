@@ -22,223 +22,172 @@ function getQuestion(index, questionId, question, answers) {
 </div>`
 }
 
-// this function generate a quiz from a json data
-/*
-*  @param answes answers of question. It is an array
-* @return a list of data. It is an <code>Array</code>
-*/
-function genQuizByTerm(quizData) {
-    let allTerms = [];
-    for (const id in quizData) {
-        if (Object.hasOwnProperty.call(quizData, id)) {
-            const element = quizData[id];
+/**
+ * get quiz list by using key as key as question and values as answers
+ * @param {*} terms is a aarray contain quiz
+ */
+function getQuestionByKey(terms) {
+    let answers = [];
 
-            if (allTerms.indexOf(element.term) == -1) {
-                allTerms.push(element.term);
-            }
-
+    // get unique definition 
+    terms.forEach(el => {
+        if (answers.indexOf(el.definition) == -1) {
+            answers.push(el.definition)
         }
-    }
+    });
+    let quizs = terms.map((el) => {
 
-    let quizList = []; // this will contain quiz data for each element will under format {quizId, question, answers}
+        let numberOfAnswers = answers.length >= 4 ? 3 : answers.length - 1;
 
-    for (const id in quizData) {
-        if (Object.hasOwnProperty.call(quizData, id)) {
-            const element = quizData[id];
+        let quizAnswers = [el.definition];
 
-            let answerIndex = allTerms.indexOf(element.term);
+        for (let i = 0; i < numberOfAnswers;) {
 
-            let answers = [element.term];
+            let answer = answers[Math.round(Math.random() * (answers.length - 1))]; // lấy ra 1 đáp án ngẫu nhiên của phần từ answers list
 
-            let maxAnswer = allTerms.length - 1 >= 3 ? 3 : allTerms.length - 1;
-
-            for (let i = 0; i < maxAnswer;) {
-                let termId = Math.round(Math.random() * (allTerms.length - 1));
-                let term = allTerms[termId];
-
-                if (answers.indexOf(term) == -1) {
-                    answers.push(term);
-                    i++;
+            if (quizAnswers.indexOf(answer) == -1) {
+                if (Math.round(Math.random)) {
+                    quizAnswers.push(answer);
+                } else {
+                    quizAnswers.unshift(answer);
                 }
+                i++;
             }
-
-            if (Math.round(Math.random())) {
-                quizList.push({
-                    quizId: id,
-                    question: element.definition,
-                    answers
-                });
-            } else {
-                quizList.unshift({
-                    quizId: id,
-                    question: element.definition,
-                    answers
-                });
-            }
-
-
-
         }
-    }
+        return {
+            "quizId": el.termID,
+            "question": el.key,
+            "answers": quizAnswers,
+        };
+    })
 
-    return quizList;
+    return quizs;
+
 }
 
-// this function generate a quiz from a json data
-/*
-*  @param answes answers of question. It is an array
-* @return a list of data. It is an <code>Array</code>
-*/
-function genQuizByDefinition(quizData) {
-    let allDefinitions = [];
-    for (const id in quizData) {
-        if (Object.hasOwnProperty.call(quizData, id)) {
-            const element = quizData[id];
+/**
+ * 
+ * @param {*} terms 
+ * @returns 
+ */
+function getQuestionByDefinition(terms) {
+    let answers = [];
 
-            if (allDefinitions.indexOf(element.definition) == -1) {
-                allDefinitions.push(element.definition);
-            }
-
+    // get unique definition 
+    terms.forEach(el => {
+        if (answers.indexOf(el.key) == -1) {
+            answers.push(el.key)
         }
-    }
+    });
+    let quizs = terms.map((el) => {
 
-    let quizList = []; // this will contain quiz data for each element will under format {quizId, question, answers}
+        let numberOfAnswers = answers.length >= 4 ? 3 : answers.length - 1;
 
-    for (const id in quizData) {
-        if (Object.hasOwnProperty.call(quizData, id)) {
-            const element = quizData[id];
+        let quizAnswers = [el.key];
 
-            let answerIndex = allDefinitions.indexOf(element.definition);
+        for (let i = 0; i < numberOfAnswers;) {
 
-            let answers = [element.definition];
+            let answer = answers[Math.round(Math.random() * (answers.length - 1))]; // lấy ra 1 đáp án ngẫu nhiên của phần từ answers list
 
-            let maxAnswer = allDefinitions.length - 1 >= 3 ? 3 : allDefinitions.length - 1;
-
-            for (let i = 0; i < maxAnswer;) {
-                let termId = Math.round(Math.random() * (allDefinitions.length - 1));
-                let term = allDefinitions[termId];
-
-                if (answers.indexOf(term) == -1) {
-                    answers.push(term);
-                    i++;
+            if (quizAnswers.indexOf(answer) == -1) {
+                if (Math.round(Math.random)) {
+                    quizAnswers.push(answer);
+                } else {
+                    quizAnswers.unshift(answer);
                 }
+                i++;
             }
-
-            if (Math.round(Math.random())) {
-                quizList.push({
-                    quizId: id,
-                    question: element.term,
-                    answers
-                });
-            } else {
-                quizList.unshift({
-                    quizId: id,
-                    question: element.term,
-                    answers
-                });
-            }
-            
-
         }
-    }
+        return {
+            "quizId": el.termID,
+            "question": el.definition,
+            "answers": quizAnswers,
+        };
+    })
 
-    return quizList;
+    return quizs;
+
 }
 
+function getRandomTermsByNumber(terms, amount) {
+    if (amount >= terms.length) {
+        return terms;
+    } else {
+        let termList = [];
 
+        for (let i = 0; i < terms.length; i++) {
+            termList.splice(Math.round(Math.random() * i), 0, terms[i]);
+        }
+        return termList.slice(0, amount);
+    }
+}
 
 $(document).ready(() => {
-    "use strict";
 
-    const amount = 4;
-    const quizData = {
-        "111": {
-            term: "Thanh Hóa",
-            definition: "Nem chua là đặc sản của khu vực nào?"
-        },
-        "112": {
-            term: "Hà Nội",
-            definition: "Đâu là thủ đo của nước việt nam?"
-        },
-        "113": {
-            term: "Hải Dương",
-            definition: "Đâu là quê hương của bánh đậu xanh?"
-        },
-        "114": {
-            term: "Hòa Lạc",
-            definition: "Bún Bò nào là ngon nhất?"
-        }
-    };
+    const terms = [{ "termID": 4, "key": "Hòa Lạc", "definition": "Bún bò ngon nhất là ở đâu ?" }, { "termID": 5, "key": "Thanh Hóa", "definition": "Nem chua có xuất sứ ở đâu ?" }, { "termID": 6, "key": "Vũng Tàu", "definition": "Nơi nào sau đây ở Việt Nam có vùng biển được bình chọn là đẹp nhất năm 2018 ?" }, { "termID": 7, "key": "Hà Nội", "definition": "Đâu là thử đô của Việt Nam ?" }, { "termID": 74, "key": "Sóc Trăng", "definition": "Bánh Pía là đặc sản của tỉnh nào sau đây?" }, { "termID": 76, "key": "Đà Lạt", "definition": "Bánh tráng nướng là món ăn nổi tiếng nhất ở địa phương nào?" }, { "termID": 77, "key": "Lẩu mắm", "definition": "U Minh nổi tiếng với món đặc sản nào sau đây? " }, { "termID": 78, "key": "Vũng Tàu", "definition": "Bánh khọt là đặc sản của tỉnh:" }, { "termID": 79, "key": "Đồng Tháp", "definition": "Các món ăn về chuột đồng không thể bỏ lỡ khi bạn đến với tỉnh thành nào? " }, { "termID": 80, "key": "Gỏi lá sầu đâu", "definition": "Châu Đốc, An Giang nổi tiếng với món gỏi nào sao đây?" }, { "termID": 81, "key": "Bình Thuận", "definition": "Món bánh xèo là đặc sản nổi tiếng của địa phương nào dưới đây?" }, { "termID": 83, "key": "Nha Trang", "definition": "Bạn có thể tìm thấy món bún sứa thơm ngon ở vùng nào sau đây?" }, { "termID": 84, "key": "Đắk Nông", "definition": "Cá lăng nướng than là món ăn đặc trưng của vùng nào sau đây?" }, { "termID": 85, "key": "Bún chả cá", "definition": "Nói đến Đà Nẵng thì đặc sản đầu tiên phải kể đến đó chính là:" }, { "termID": 86, "key": "Bánh đa cua", "definition": " Nhắn đến đặc sản đất cảng Hải Phòng, không thể không kể đến món nào dưới đây? " }, { "termID": 87, "key": "Nam Định", "definition": "Bún đũa là đặc sản của tỉnh:" }, { "termID": 88, "key": "Ninh Bình", "definition": "Cơm cháy là đặc sản nổi tiếng của vùng địa phương nào dưới đây?" }, { "termID": 89, "key": " Bánh bèo", "definition": "Tên gọi của món đặc sản nổi tiếng đất Huế dưới đây là:" }, { "termID": 90, "key": "Thanh Hóa", "definition": " Nem chua là đặc sản của tỉnh nào?" }, { "termID": 91, "key": "Hà Nội", "definition": "Đâu là địa danh nổi tiếng với món phở gà?" }];
 
-    // 
+    let recomendAmount = terms.length < 20 ? terms.length : 20;
 
-    $("#quiz-test-box").html(genQuizByTerm(quizData).map((el, index) => getQuestion(index + 1, el.quizId, el.question, el.answers)).join("\n"));
+    let quizs = getRandomTermsByNumber(terms, recomendAmount);
+
+    $("#quiz-test-box").html(getQuestionByDefinition(quizs).map((el, index) => getQuestion(index + 1, el.quizId, el.question, el.answers)).join("\n"));
+
+    $("#submit-button").click((e) => {
+        let score = 0;
+        terms.forEach(card => {
+
+
+            let quizAnswer = [...document.getElementsByName("item_" + card["termID"])].filter(el => el.checked)[0];
+
+            if (quizAnswer) { // contain true data
+                if (card.key === quizAnswer.value || card.definition === quizAnswer.value) {
+                    $(`.item_${card["termID"]}`).css("color", "green");
+                    score++;
+                } else {
+                    $(`.item_${card["termID"]}`).css("color", "red");
+                }
+
+            } else { // not contain
+                $(`.item_${card["termID"]}`).css("color", "red");
+
+            }
+
+            [...document.getElementsByName("item_" + card["termID"])].forEach(el => el.disabled = true);
+        });
+        $("#quiz-result").text(`${score * 100.0 / terms.length}%`);
+
+    });
 
     $("#btn-retake-quiz").click(() => {
 
         // handle data here 
         // after that re-render data
 
-        let numberOfQuix = parseInt($("#quiz-amount-input").val());
+        let numberOfQuiz = parseInt($("#quiz-amount-input").val());
+
+        let quizsList = getRandomTermsByNumber(terms, numberOfQuiz);
 
         let isTermQuiz = document.getElementById("quiz-type-term").checked;
 
         if (isTermQuiz) {
-            $("#quiz-test-box").html(genQuizByTerm(quizData).map((el, index) => getQuestion(index + 1, el.quizId, el.question, el.answers)).join("\n"));
+            $("#quiz-test-box").html(getQuestionByDefinition(quizsList).map((el, index) => getQuestion(index + 1, el.quizId, el.question, el.answers)).join("\n"));
         } else {
-            $("#quiz-test-box").html(genQuizByDefinition(quizData).map((el, index) => getQuestion(index + 1, el.quizId, el.question, el.answers)).join("\n"));
+            $("#quiz-test-box").html(getQuestionByKey(quizsList).map((el, index) => getQuestion(index + 1, el.quizId, el.question, el.answers)).join("\n"));
         }
 
 
     })
-
-    $("#submit-button").click((e) => {
-
-        let score = 0;
-        for (const quizId in quizData) {
-            if (Object.hasOwnProperty.call(quizData, quizId)) {
-
-
-                const element = quizData[quizId];
-
-                let quizAnswer = [...document.getElementsByName("item_" + quizId)].filter(el => el.checked)[0];
-
-                if (quizAnswer) { // contain true data
-                    if (element.term === quizAnswer.value || element.definition === quizAnswer.value) {
-                        $(`.item_${quizId}`).css("color", "green");
-                        score++;
-                    } else {
-                        $(`.item_${quizId}`).css("color", "red");
-                    }
-
-                } else { // not contain
-                    $(`.item_${quizId}`).css("color", "red");
-
-                }
-
-                [...document.getElementsByName("item_" + quizId)].forEach(el => el.disabled = true);
-
-            }
-        }
-        $("#quiz-result").text(`${score * 100.0 / amount}%`);
-    });
-
-
-    //------ handle amount field---------
 
     const amountFeild = document.getElementById("quiz-amount-input");
 
     amountFeild.onkeypress = (evt) => {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         let newVal = parseInt(amountFeild.value + evt.key);
-        if (charCode > 31 && (charCode < 48 || charCode > 57) || (isNaN(newVal) || newVal > amount || newVal <= 0))
+        if (charCode > 31 && (charCode < 48 || charCode > 57) || (isNaN(newVal) || newVal > terms.length || newVal <= 0))
             return false;
         return true;
     }
 
-    document.getElementById("quiz-amount-number").innerText = amount;
+    document.getElementById("quiz-amount-number").innerText = terms.length;
+
 });
-
-
-
-

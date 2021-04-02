@@ -53,29 +53,29 @@ namespace PRN_Final_Project.DAO.Impl
         public string ForgotPassword(string username, string email)
         {
 
-            string sql = "select * from [User] where username = @user and email = @email";
+            //string sql = "select * from [User] where username = @user and email = @email";
 
-            SqlParameter[] parameter = new SqlParameter[]
-            {
-                new SqlParameter("@user", SqlDbType.VarChar),
-                new SqlParameter("@email", SqlDbType.VarChar),
-            };
+            //SqlParameter[] parameter = new SqlParameter[]
+            //{
+            //    new SqlParameter("@user", SqlDbType.VarChar),
+            //    new SqlParameter("@email", SqlDbType.VarChar),
+            //};
 
-            parameter[0].Value = username;
-            parameter[1].Value = email;
+            //parameter[0].Value = username;
+            //parameter[1].Value = email;
 
-            string randomPass = getRandomPass();
+            //string randomPass = getRandomPass();
 
-            if(GetDataBySQL(sql, parameter).Rows.Count > 0 && ChangePassword(username, randomPass))
-            {
-                 return randomPass;
-            
-            }
-            else
-            {
-                return null;
-            }
-            
+            //if(GetDataBySQL(sql, parameter).Rows.Count > 0 && ChangePassword(username, randomPass))
+            //{
+            //     return randomPass;
+
+            //}
+            //else
+            //{
+            //    return null;
+            //}
+            return null;
         }
 
         public string getRandomPass()
@@ -150,6 +150,16 @@ namespace PRN_Final_Project.DAO.Impl
             parameter[3].Value = fullName;
             parameter[4].Value = activeCode;
             return ExecuteSQL(sql, parameter) > 0;
+            
+        }
+        public string getAccountByQuizId(int quizId)
+        {
+            string sql = "select username from quiz where quizId = @quizId";
+            SqlParameter parameter = new SqlParameter("@quizId", SqlDbType.Int);
+            parameter.Value = quizId;
+            DataTable data = GetDataBySQL(sql, parameter);
+            string account = data.Rows[0][0].ToString();
+            return account;
         }
 
         public bool Register(string username, string password, string email, string fullName)

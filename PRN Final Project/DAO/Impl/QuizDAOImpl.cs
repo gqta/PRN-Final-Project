@@ -15,7 +15,7 @@ namespace PRN_Final_Project.DAO.Impl
             string sql = "with Amount as(select count(*) as amount, quizId from QuizDetail group by quizId)" +
                 " select[User].fullName, quiz.* , amount" +
                 " from Quiz join[User] on Quiz.username = [User].username" +
-                " join Amount on Quiz.quizId = Amount.quizId " +
+                " left join Amount on Quiz.quizId = Amount.quizId " +
                 " where quizName like @key or quizDescription like @key and access=2 order by createdDate desc";
             SqlParameter parameter = new SqlParameter("@key", SqlDbType.NVarChar);
             parameter.Value = "%" + keyword + "%";
@@ -32,7 +32,7 @@ namespace PRN_Final_Project.DAO.Impl
                     QuizName = row["QuizName"].ToString(),
                     QuizDescription = row["QuizDescription"].ToString(),
                     CreatedDate = DateTime.Parse(row["CreatedDate"].ToString()),
-                    TermAmount = int.Parse(row["amount"].ToString()),
+                    TermAmount = row["amount"]==null? 0 : int.Parse(row["amount"].ToString()),
                 });
             }
             return lst;
@@ -43,7 +43,7 @@ namespace PRN_Final_Project.DAO.Impl
             string sql = "with Amount as(select count(*) as amount, quizId from QuizDetail group by quizId)" +
                 " select[User].fullName, quiz.* , amount " +
                 "from Quiz join[User] on Quiz.username = [User].username " +
-                "join Amount on Quiz.quizId = Amount.quizId " +
+                "left join Amount on Quiz.quizId = Amount.quizId " +
                 "where Quiz.username = @user order by createdDate desc";
             SqlParameter parameter = new SqlParameter("@user", SqlDbType.NVarChar);
             parameter.Value = username;
@@ -60,14 +60,34 @@ namespace PRN_Final_Project.DAO.Impl
                     QuizName = row["QuizName"].ToString(),
                     QuizDescription = row["QuizDescription"].ToString(),
                     CreatedDate = DateTime.Parse(row["CreatedDate"].ToString()),
-                    TermAmount = int.Parse(row["amount"].ToString()),
+                    TermAmount = row["amount"] == null ? 0 : int.Parse(row["amount"].ToString()),
                 });
             }
 
 
             return lst;
         }
-
+        public Quiz getQuizByQuizId(int quizId)
+        {
+            string sql = "select * from quiz where quizId = @quizId";
+            SqlParameter parameter = new SqlParameter("@quizId", SqlDbType.Int);
+            parameter.Value = quizId;
+            Quiz quiz = new Quiz();
+            DataTable data = GetDataBySQL(sql, parameter);
+            foreach (DataRow row in data.Rows) {
+                quiz = new Quiz()
+                {
+                    Creator = row["username"].ToString(),
+                    QuizId = int.Parse(row["QuizId"].ToString()),
+                    QuizName = row["QuizName"].ToString(),
+                    QuizDescription = row["QuizDescription"].ToString(),
+                    CreatedDate = DateTime.Parse(row["CreatedDate"].ToString()),
+                   
+                };
+            }
+            return quiz;
+                
+        }
         public bool DeleteQuiz(int quizID)
         {
 
@@ -79,27 +99,32 @@ namespace PRN_Final_Project.DAO.Impl
 
         }
 
-        public bool UpdateQuiz(int quizId, int quizName, int quizDes, int access)
+        public bool UpdateQuiz(int quizId, string quizName, string quizDes, int access)
         {
-
-            string sql = "UPDATE [dbo].[Quiz]" +
-      "[quizName] = @quizName " +
-      " ,[quizDescription] = @quizDes " +
-      " ,[createdDate] = GetDate()" +
-      ",[access] = @access" +
-      " WHERE [quizId] = @quizId ";
+            string sql = "delete from quizDetail where quizId = @quizId" +
+            " UPDATE[dbo].[Quiz]"+
+            " SET"+
+            " [quizName] = @quizName" +
+            " ,[quizDescription] = @quizDes " +
+            " ,[createdDate] = GETDATE()"+
+            " ,[access] = @access"+
+            " WHERE quizId = @quizId ";
+            
             SqlParameter[] parameter = new SqlParameter[] {
                 new SqlParameter("@quizName",SqlDbType.NVarChar),
                 new SqlParameter("@quizDes",SqlDbType.NVarChar),
                 new SqlParameter("@access",SqlDbType.Int),
                 new SqlParameter("@quizId",SqlDbType.Int)
             };
-
+            parameter[0].Value = quizName;
+            parameter[1].Value = quizDes;
+            parameter[2].Value = access;
+            parameter[3].Value = quizId;
             return (ExecuteSQL(sql, parameter) > 0);
 
         }
 
-        public bool AddQuiz(int username, int quizName, int quizDes, int access)
+        public int AddQuiz(string username, string quizName, string quizDes, int access)
         {
 
             string sql = "INSERT INTO [dbo].[Quiz] VALUES "+
@@ -114,7 +139,12 @@ namespace PRN_Final_Project.DAO.Impl
                 new SqlParameter("@quizDes",SqlDbType.NVarChar),
                 new SqlParameter("@access",SqlDbType.Int),
             };
-            return (ExecuteSQL(sql, parameter) > 0);
+            parameter[0].Value = username;
+            parameter[1].Value = quizName;
+            parameter[2].Value = quizDes;
+            parameter[3].Value = access;
+            DataTable data = GetDataBySQL(sql,parameter);
+            return int.Parse(data.Rows[0]["quizId"].ToString());
 
         }
     }
