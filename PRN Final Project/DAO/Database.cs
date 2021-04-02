@@ -26,7 +26,7 @@ namespace PRN_Final_Project.DAO
         /// </summary>
         /// <param name="sql">1 câu lệnh sql sử dụng để truy vấn trên database</param>
         /// <returns>DataTable</returns>
-        public DataTable GetDataBySQL(string sql)
+        protected DataTable GetDataBySQL(string sql)
         {
             
             SqlCommand cmd = new SqlCommand(sql, GetConnection());
@@ -45,7 +45,7 @@ namespace PRN_Final_Project.DAO
         /// <param name="sql">Câu lệnh sql dùng để thực thi truy vấn</param>
         /// <param name="parameter">tham số truyền vào của sql</param>
         /// <returns>Datatable chứa các dữ liệu truy vấn bởi sql</returns>
-        public DataTable GetDataBySQL(string sql, params SqlParameter[] parameter)
+        protected DataTable GetDataBySQL(string sql, params SqlParameter[] parameter)
         {
 
             SqlCommand cmd = new SqlCommand(sql, GetConnection());
@@ -63,7 +63,7 @@ namespace PRN_Final_Project.DAO
         /// <param name="sql">Câu lệnh sql</param>
         /// <param name="para">Tham số của câu lệnh sql</param>
         /// <returns>Số bản ghi bị tác động</returns>
-        public int ExecuteSQL(string sql, params SqlParameter[] para)
+        protected int ExecuteSQL(string sql, params SqlParameter[] para)
         {
 
             SqlCommand cmd = new SqlCommand(sql, GetConnection());
@@ -80,7 +80,7 @@ namespace PRN_Final_Project.DAO
         /// <param name="sql">Câu lệnh sql</param>
         /// <param name="pram">tham số đầu vào</param>
         /// <returns></returns>
-        public int GetAmountRecord(string sql, params SqlParameter[] pram)
+        protected int GetAmountRecord(string sql, params SqlParameter[] pram)
         {
             SqlCommand cmd = new SqlCommand(sql, GetConnection());
             cmd.Parameters.AddRange(pram);
@@ -95,7 +95,7 @@ namespace PRN_Final_Project.DAO
         /// </summary>
         /// <param name="input">text want to convert</param>
         /// <returns>Result of hashing</returns>
-        public string CreateMD5(string input)
+        protected string CreateMD5(string input)
         {
             // Use input string to calculate MD5 hash
             using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())

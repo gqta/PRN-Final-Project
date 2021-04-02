@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Web.Http;
 
 namespace PRN_Final_Project
@@ -23,8 +24,11 @@ namespace PRN_Final_Project
             config.Routes.MapHttpRoute(
                 name: "QuizAPI",
                 routeTemplate: "api/quiz/{id}",
-                defaults: new { controller="QuizAPI", action="Get", id = RouteParameter.Optional }
+                defaults: new { controller="QuizAPIController", action="Get", id = RouteParameter.Optional }
             );
+
+            config.Formatters.JsonFormatter.SupportedMediaTypes
+            .Add(new MediaTypeHeaderValue("text/html"));
         }
     }
 }
