@@ -1,4 +1,5 @@
 ﻿using PRN_Final_Project.DAO.Impl;
+using PRN_Final_Project.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +18,13 @@ namespace PRN_Final_Project.Controllers
 
         public ActionResult Search()
         {
-
+            ViewBag.Result = new List<Quiz>();
             if (!String.IsNullOrEmpty(Request["keyword"]))
             {
                 ViewBag.Result = new QuizDAOImpl().Search(Request["keyword"]);
-                //return Json(new QuizDAOImpl().Search(Request["keyword"]), JsonRequestBehavior.AllowGet);
             }
             return View();
         }
+
     }
 }

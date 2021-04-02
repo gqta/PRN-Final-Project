@@ -19,6 +19,12 @@ namespace PRN_Final_Project
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "QuizAPI",
+                routeTemplate: "api/quiz/{id}",
+                defaults: new { controller="QuizAPI", action="Get", id = RouteParameter.Optional }
+            );
         }
     }
 }
