@@ -67,7 +67,27 @@ namespace PRN_Final_Project.DAO.Impl
 
             return lst;
         }
-
+        public Quiz getQuizByQuizId(int quizId)
+        {
+            string sql = "select * from quiz where quizId = @quizId";
+            SqlParameter parameter = new SqlParameter("@quizId", SqlDbType.Int);
+            parameter.Value = quizId;
+            Quiz quiz = new Quiz();
+            DataTable data = GetDataBySQL(sql, parameter);
+            foreach (DataRow row in data.Rows) {
+                quiz = new Quiz()
+                {
+                    Creator = row["username"].ToString(),
+                    QuizId = int.Parse(row["QuizId"].ToString()),
+                    QuizName = row["QuizName"].ToString(),
+                    QuizDescription = row["QuizDescription"].ToString(),
+                    CreatedDate = DateTime.Parse(row["CreatedDate"].ToString()),
+                   
+                };
+            }
+            return quiz;
+                
+        }
         public bool DeleteQuiz(int quizID)
         {
 
@@ -79,15 +99,17 @@ namespace PRN_Final_Project.DAO.Impl
 
         }
 
-        public bool UpdateQuiz(int quizId, int quizName, int quizDes, int access)
+        public bool UpdateQuiz(int quizId, string quizName, string quizDes, int access)
         {
-
-            string sql = "UPDATE [dbo].[Quiz]" +
-      "[quizName] = @quizName " +
-      " ,[quizDescription] = @quizDes " +
-      " ,[createdDate] = GetDate()" +
-      ",[access] = @access" +
-      " WHERE [quizId] = @quizId ";
+            string sql = "delete from quizDetail where quizId = @quizId" +
+            " UPDATE[dbo].[Quiz]"+
+            " SET"+
+            " [quizName] = @quizName" +
+            " ,[quizDescription] = @quizDes " +
+            " ,[createdDate] = GETDATE()"+
+            " ,[access] = @access"+
+            " WHERE quizId = @quizId ";
+            
             SqlParameter[] parameter = new SqlParameter[] {
                 new SqlParameter("@quizName",SqlDbType.NVarChar),
                 new SqlParameter("@quizDes",SqlDbType.NVarChar),

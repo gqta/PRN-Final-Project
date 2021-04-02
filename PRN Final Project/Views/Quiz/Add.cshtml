@@ -31,60 +31,18 @@
 
 <body>
     <header class="quiz-add-sticky">
-        <div class="header-area">
-            <div class="main-header ">
-                <div class="container-fluid">
-                    <div class="menu-wrapper d-flex align-items-center justify-content-between">
-                        <div class="left-content d-flex align-items-center">
-                            <div class="logo">
-                                <a href="/"><img src="/Assets/img/logo/logo.png" alt=""></a>
-                            </div>
-
-                            <form action="search.html" class="form-box">
-                                <input type="text" name="Search" placeholder="Search courses..">
-                                <div class="search-icon">
-                                    <i class="ti-search"></i>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div class="main-menu d-none d-lg-block">
-                            <nav>
-                                <ul id="navigation">
-                                    <li><a href="index-2.html">Trang chủ</a></li>
-                                    <li><a href="courses.html">Thư viện của bạn</a></li>
-
-                                    <li>
-                                        <a href="~/quiz/add" class="quiz-add"> Học phần mới </a>
-                                    </li>
-                                    <li>
-                                        <a href="~/login" class="btn header-btn2">Sign In</a>
-                                    </li>
-                                    <li>
-                                        <a href="~/register" class="btn header-btn2">Sign Up</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="mobile_menu d-block d-lg-none"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @Html.Partial("~/Views/Shared/_Header.cshtml")
     </header>
     <main>
 
-        <form action="~/quiz/add" method="post">
+        <form action="~/quiz/add" method="post" onsubmit="Alert()">
             <div class="row  quiz-add-header-sticky">
                 <div class="col-sm-6 col-md-6 quiz-add-header">
                     <h3>Tạo học phần mới</h3>
                     <p><span id="term-amount">2</span> thuật ngữ</p>
                 </div>
                 <div class="col-sm-6 col-md-6">
-                    <button class="btn quiz-add-button" type="submit" name="submit" value="Add">Tạo</button>
+                    <button class="btn quiz-add-button" type="submit" name="submit" value="Add">Lưu</button>
                 </div>
             </div>
             <section class="popular-directorya-area  fix">
@@ -250,6 +208,11 @@
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'UA-23581568-13');
+    </script>
+    <script>
+        function Alert() {
+            alert("Thêm bộ câu hỏi thành công!");
+        }
     </script>
     
 </body>

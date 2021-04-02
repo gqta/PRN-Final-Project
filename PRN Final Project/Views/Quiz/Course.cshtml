@@ -1,4 +1,8 @@
-﻿@using PRN_Final_Project.Models
+﻿
+@{
+    ViewBag.Title = "Course";
+}
+@using PRN_Final_Project.Models
 @{
     ViewBag.Title = "Course";
 }
@@ -84,9 +88,9 @@
                             <div class="properties pb-20 quiz-card">
                                 <div class="properties-card">
                                     <div class="properties-caption">
-                                        <a href="quiz.html">
+                                        <a href="~/quiz/detail?id=@course.QuizId">
                                             <h3>
-                                                <a href="quiz.html">@course.QuizName</a>
+                                                <a href="~/quiz/detail?id=@course.QuizId">@course.QuizName</a>
                                             </h3>
                                         </a>
 
@@ -103,7 +107,7 @@
                             </div>
                         }
                     }
-                </div>       
+                </div>
         </section>
 
 
@@ -128,9 +132,9 @@
                             <div class="properties pb-20 quiz-card">
                                 <div class="properties-card">
                                     <div class="properties-caption">
-                                        <a href="quiz.html">
+                                        <a href="~/quiz/detail?id=@course.QuizId">
                                             <h3>
-                                                <a href="quiz.html">@course.QuizName</a>
+                                                <a href="~/quiz/detail?id=@course.QuizId">@course.QuizName</a>
                                             </h3>
                                         </a>
 
@@ -149,7 +153,7 @@
                     }
                 </div>
 
-               
+
         </section>
 
     </main>
@@ -229,3 +233,4 @@
 <!-- Mirrored from preview.colorlib.com/theme/onedu/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 28 Mar 2021 14:04:27 GMT -->
 
 </html>
+
