@@ -35,7 +35,7 @@ namespace PRN_Final_Project.DAO
         /// <param name="quizDes"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        bool UpdateQuiz(int quizId, int quizName, int quizDes, int access);
+        bool UpdateQuiz(int quizId, string quizName, string quizDes, int access);
 
         /// <summary>
         /// Add new quiz to database include name, des, access
