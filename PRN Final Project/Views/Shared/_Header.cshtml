@@ -1,0 +1,61 @@
+﻿@{ Layout = null; }
+<header>
+    <div class="header-area">
+        <div class="main-header header-sticky">
+            <div class="container-fluid">
+                <div class="menu-wrapper d-flex align-items-center justify-content-between">
+                    <div class="left-content d-flex align-items-center">
+                        <div class="logo">
+                            <a href="/"><img src="/Assets/img/logo/logo.png" alt=""></a>
+                        </div>
+
+                        <form action="/quiz/search" class="form-box">
+                            <input type="text" name="Search" placeholder="Search courses..">
+                            <div class="search-icon">
+                                <i class="ti-search"></i>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="main-menu d-none d-lg-block">
+                        <nav>
+                            <ul id="navigation">
+                                <li><a href="/">Trang chủ</a></li>
+                                <li><a href="/Quiz/Course">Thư viện của bạn</a></li>
+
+                                <li>
+                                    <a href="/Quiz/Add" class="quiz-add"> Học phần mới </a>
+                                </li>
+                                @if ( String.IsNullOrEmpty(Request.Cookies["user"].Value))
+                                {
+                    <li>
+                        <a href="~/login" class="btn header-btn2">Sign In</a>
+                    </li>
+                                    <li>
+                                        <a href="~/register" class="btn header-btn2">Sign Up</a>
+                                    </li>
+ }
+                                else
+                                {
+                    <li>
+                        Chào, @Request.Cookies["user"].Value.ToString()
+
+                    </li>
+                                    <li>
+
+                                        <a href="~/logout" class="btn header-btn2">Logout</a>
+                                    </li>
+}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="mobile_menu d-block d-lg-none"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+

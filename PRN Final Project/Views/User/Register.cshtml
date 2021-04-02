@@ -1,0 +1,118 @@
+﻿
+@{ ViewBag.Title = "Register"; }
+
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<!-- Mirrored from preview.colorlib.com/theme/onedu/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 28 Mar 2021 14:05:09 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Sign Up</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="/Assets/img/icon/favicon.png">
+
+    <link rel="stylesheet" href="/Assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/Assets/css/slicknav.css">
+    <link rel="stylesheet" href="/Assets/css/flaticon.css">
+    <link rel="stylesheet" href="/Assets/css/animate.min.css">
+    <link rel="stylesheet" href="/Assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="/Assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/Assets/css/themify-icons.css">
+    <link rel="stylesheet" href="/Assets/css/slick.css">
+    <link rel="stylesheet" href="/Assets/css/nice-select.css">
+    <link rel="stylesheet" href="/Assets/css/style.css">
+</head>
+
+<body>
+    <main class="login-bg">
+
+        <div class="register-form-area">
+
+            <form action="~/register" method="post">
+                <div class="register-form text-center">
+
+                    <div class="register-heading">
+                        <span>Sign Up</span>
+                        <p>Create your account to get full access</p>
+                        @if (ViewData["message"] != null)
+                        {
+                            <p class="text-warning">@ViewData["message"].ToString()</p>}
+                    </div>
+
+                    <div class="input-box">
+                        <div class="single-input-fields">
+                            <label>User name</label>
+                            <input type="text" name="username" placeholder="Enter user name" required>
+                        </div>
+                        <div class="single-input-fields">
+                            <label>Full name</label>
+                            <input type="text" name="fullname" placeholder="Enter full name" required>
+                        </div>
+                        <div class="single-input-fields">
+                            <label>Email Address</label>
+                            <input type="email" name="email" placeholder="Enter email address" required>
+                        </div>
+                        <div class="single-input-fields">
+                            <label>Password</label>
+                            <input type="password" name="password" placeholder="Enter Password" required>
+                        </div>
+                        <div class="single-input-fields">
+                            <label>Confirm Password</label>
+                            <input type="password" name="repassword" placeholder="Confirm Password" required>
+                        </div>
+                    </div>
+
+                    <div class="register-footer">
+                        <p> Already have an account? <a href="/User/Login"> Login</a> here</p>
+                        <input type="submit" name="submit" class="submit-btn3" value="Sign-up" />
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </main>
+
+
+    <script src="/Assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="/Assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="/Assets/js/popper.min.js"></script>
+    <script src="/Assets/js/bootstrap.min.js"></script>
+
+    <script src="/Assets/js/owl.carousel.min.js"></script>
+    <script src="/Assets/js/slick.min.js"></script>
+    <script src="/Assets/js/jquery.slicknav.min.js"></script>
+
+    <script src="/Assets/js/wow.min.js"></script>
+    <script src="/Assets/js/jquery.magnific-popup.js"></script>
+    <script src="/Assets/js/jquery.nice-select.min.js"></script>
+    <script src="/Assets/js/jquery.counterup.min.js"></script>
+    <script src="/Assets/js/waypoints.min.js"></script>
+
+    <script src="/Assets/js/contact.js"></script>
+    <script src="/Assets/js/jquery.form.js"></script>
+    <script src="/Assets/js/jquery.validate.min.js"></script>
+    <script src="/Assets/js/mail-script.js"></script>
+    <script src="/Assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <script src="/Assets/js/plugins.js"></script>
+    <script src="/Assets/js/main.js"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-23581568-13');</script>
+</body>
+</body>
+
+<!-- Mirrored from preview.colorlib.com/theme/onedu/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 28 Mar 2021 14:05:09 GMT -->
+
+</html>
+

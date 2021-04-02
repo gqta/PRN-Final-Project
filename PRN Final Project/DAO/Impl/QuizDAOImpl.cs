@@ -70,6 +70,19 @@ namespace PRN_Final_Project.DAO.Impl
             return lst;
         }
 
-        
+        public bool DeleteQuiz(int quizID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateQuiz(int quizId, int quizName, int quizDes, int access)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddQuiz(int username, int quizName, int quizDes, int access)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
