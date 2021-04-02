@@ -32,14 +32,17 @@ namespace PRN_Final_Project.DAO
         /// <param name="username"></param>
         /// <param name="email"></param>
         /// <returns></returns>
+        /// 
+    
         string ForgotPassword(string username, string email);
 
-        /// <summary>
-        /// Use to check password and usename in database
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        bool ChangePassword(string username, string password);
+       /// <summary>
+       /// Change password
+       /// </summary>
+       /// <param name="username"></param>
+       /// <param name="oldpass"></param>
+       /// <param name="password"></param>
+       /// <returns></returns>
+        bool ChangePassword(string username, string oldpass, string password);
     }
 }
