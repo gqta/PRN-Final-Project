@@ -70,15 +70,18 @@ namespace PRN_Final_Project.DAO.Impl
 
         public bool DeleteQuiz(int quizID)
         {
+
             string sql = "DELETE FROM[dbo].[Quiz] WHERE quizId = @quizid ";
             SqlParameter parameter = new SqlParameter("@quizid", SqlDbType.Int);
             parameter.Value = quizID;
 
             return (ExecuteSQL(sql, parameter) > 0);
+
         }
 
         public bool UpdateQuiz(int quizId, int quizName, int quizDes, int access)
         {
+
             string sql = "UPDATE [dbo].[Quiz]" +
       "[quizName] = @quizName " +
       " ,[quizDescription] = @quizDes " +
@@ -93,10 +96,12 @@ namespace PRN_Final_Project.DAO.Impl
             };
 
             return (ExecuteSQL(sql, parameter) > 0);
+
         }
 
         public bool AddQuiz(int username, int quizName, int quizDes, int access)
         {
+
             string sql = "INSERT INTO [dbo].[Quiz] VALUES "+
            "(@userName"+
            ", @quizName"+
@@ -110,6 +115,7 @@ namespace PRN_Final_Project.DAO.Impl
                 new SqlParameter("@access",SqlDbType.Int),
             };
             return (ExecuteSQL(sql, parameter) > 0);
+
         }
     }
 }

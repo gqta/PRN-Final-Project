@@ -142,6 +142,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuizController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAO\Database.cs" />
     <Compile Include="DAO\Impl\ProgressDAOImpl.cs" />
     <Compile Include="DAO\Impl\QuizDAOImpl.cs" />
@@ -313,6 +314,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Quiz\Search.cshtml" />
     <Content Include="Views\_Layout.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

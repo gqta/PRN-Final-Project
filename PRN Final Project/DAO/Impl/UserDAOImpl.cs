@@ -76,7 +76,7 @@ namespace PRN_Final_Project.DAO.Impl
         {
             string sql = "select * from [User] where username = @user and password = @pass";
 
-            string md5Password = CreateMD5(username.ToLower() + "_"+password);
+            //string md5Password = CreateMD5(username.ToLower() + "_"+password);
 
             SqlParameter[] parameter = new SqlParameter[]
             {
@@ -85,9 +85,9 @@ namespace PRN_Final_Project.DAO.Impl
             };
 
             parameter[0].Value = username;
-            parameter[1].Value = md5Password;
+            parameter[1].Value = password;
 
-            return GetAmountRecord(sql, parameter) > 0;
+            return GetDataBySQL(sql, parameter).Rows.Count > 0;
         }
 
         public bool Register(string username, string password, string email, string fullName)
