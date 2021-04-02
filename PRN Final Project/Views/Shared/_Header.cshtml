@@ -36,14 +36,32 @@
                                     <li>
                                         <a href="/Quiz/Add" class="quiz-add"> Học phần mới </a>
                                     </li>
-                                    <li>
+                                    @*<li>
                                         Chào, @Request.Cookies["user"].Value.ToString()
 
+                                    </li>*@
+                                    <li>
+                                        <div class="dropdown">
+                                            <button class="dropbtn">Chào, @Request.Cookies["user"].Value.ToString()</button>
+                                            <div class="dropdown-content">
+                                                <a href="~/changepassword">Change Password</a>
+                                                <a href="~/logout">Logout</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @*<li>
+
+
+                                        <a href="~/changepassword" class="btn header-btn2">Change Password</a>
                                     </li>
                                     <li>
 
-                                        <a href="~/logout" class="btn header-btn2">Đăng Xuất</a>
-                                    </li>
+                                        <a href="~/logout" class="btn header-btn2">Logout</a>
+                                    </li>*@
+
+<!--                                         <a href="~/logout" class="btn header-btn2">Đăng Xuất</a>
+                                    </li> -->
+
                                 }
                             </ul>
                         </nav>

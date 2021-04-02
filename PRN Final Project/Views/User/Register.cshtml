@@ -39,7 +39,7 @@
                         <span>Sign Up</span>
                         <p>Create your account to get full access</p>
 
-                    <p class="text-danger">@ViewBag.ErrorMessage </p>
+                        <p class="text-danger">@ViewBag.ErrorMessage </p>
                     </div>
 
                     <div class="input-box">
@@ -53,21 +53,31 @@
                         </div>
                         <div class="single-input-fields">
                             <label>Email Address</label>
-                            <input type="email" name="email" placeholder="Enter email address" required>
+                            <input oninput="ValidateEmail();" type="email" name="email" placeholder="Enter email address" required>
                         </div>
+                       
                         <div class="single-input-fields">
                             <label>Password</label>
-                            <input type="password" name="password" placeholder="Enter Password" required>
+                            <input oninput="checkPass();" class="form-control passwordInput" type="password" id="password" name="password" placeholder="Enter Password" required>
+                            <br>
+                            <span id="StrengthDisp" class="badge displayBadge">Weak</span>
+                            <br>
                         </div>
                         <div class="single-input-fields">
                             <label>Confirm Password</label>
-                            <input type="password" name="repassword" placeholder="Confirm Password" required>
+                            <input oninput="checkPass();" type="password" id="repassword" name="repassword" placeholder="Confirm Password" required>
+
+                        </div>
+                        <div class="single-input-fields">
+                            <label class="missmatch"> </label>
+
+
                         </div>
                     </div>
 
                     <div class="register-footer">
                         <p> Already have an account? <a href="/User/Login"> Login</a> here</p>
-                        <input type="submit" name="submit" class="submit-btn3" value="Sign-up" />
+                        <input type="submit" name="submit" id="submit" class="submit-btn3" value="Sign-up" />
                     </div>
                 </div>
 
@@ -100,10 +110,11 @@
 
     <script src="/Assets/js/plugins.js"></script>
     <script src="/Assets/js/main.js"></script>
+    <script src="~/Assets/js/regexJs.js"></script>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
+        window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
