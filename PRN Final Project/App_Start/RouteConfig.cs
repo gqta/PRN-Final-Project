@@ -65,6 +65,27 @@ namespace PRN_Final_Project
                 url: "quiz/add",
                 defaults: new { controller = "Quiz", action = "Add", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "TestQuiz",
+                url: "quiz/test/{id}",
+                defaults: new { controller = "Quiz", action = "Test", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Learn quiz",
+                url: "quiz/learn/{id}",
+                defaults: new { controller = "Quiz", action = "Learn", id = UrlParameter.Optional }
+            );
+
+
+
+
+            routes.MapRoute(
+                name: "Error Page",
+                url: "error/404",
+                defaults: new { controller = "Error", action = "NotFound", id = UrlParameter.Optional }
+            );
+
         }
     }
 }

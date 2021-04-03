@@ -1,0 +1,190 @@
+﻿<!doctype html>
+<html class="no-js" lang="zxx">
+
+<!-- Mirrored from preview.colorlib.com/theme/onedu/courses.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 28 Mar 2021 14:04:49 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Kiểm Tra</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Assets/img/icon/favicon.png">
+
+    <link rel="stylesheet" href="~/Assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Assets/css/slicknav.css">
+    <link rel="stylesheet" href="~/Assets/css/flaticon.css">
+    <link rel="stylesheet" href="~/Assets/css/animate.min.css">
+    <link rel="stylesheet" href="~/Assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="~/Assets/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Assets/css/slick.css">
+    <link rel="stylesheet" href="~/Assets/css/nice-select.css">
+    <link rel="stylesheet" href="~/Assets/css/style.css">
+    <link rel="stylesheet" href="~/Assets/css/main.css">
+</head>
+
+<body>
+    @Html.Partial("~/Views/Shared/_Header.cshtml")
+    <main>
+
+        <div class="hero-area slider-area">
+            <div class="hero-height2 hero-bg2 d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="hero-cap">
+                                <h2>Học phần của bạn</h2>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                                        <li class="breadcrumb-item"><a href="courses.html">Học phần của bạn</a></li>
+                                        <li class="breadcrumb-item"><a href="test.html">Kiểm tra</a></li>
+
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="sticky-right d-sm-block">
+            <div class="row text-center quiz-setting">
+                <h4>Setting</h4>
+            </div>
+            <div class="row quiz-setting">
+                <div class="col-sm-10"><label>Số Lượng câu hỏi: </label></div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="row quiz-setting">
+                <div class="amount-center">
+                    <input type="text" id="quiz-amount-input" />
+                    /<label id="quiz-amount-number">100</label>
+                </div>
+            </div>
+
+            <div class="row quiz-setting">
+                <div class="col-sm-10"><label>Trả lời bằng: </label></div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="row quiz-setting">
+                <table class="quiz-form-type">
+                    <tr>
+                        <td><input type="radio" name="quiz-type" id="quiz-type-term" value="1" checked /></td>
+                        <td> <label id="quiz-amount-number">Thuật ngữ</label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="quiz-amount-input" name="quiz-type" id="quiz-type-definition" value="0" />
+                        </td>
+                        <td><label id="quiz-amount-number">Định Nghĩa</label></td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div class="row quiz-setting">
+                <div class="col-sm-10"><label>Kết quả cuối</label></div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="row quiz-setting">
+                <h3 class="quiz-result" id="quiz-result">
+                    0%
+                </h3>
+
+            </div>
+
+            <div class="row quiz-setting">
+                <button class="btn quiz-retake-button" id="btn-retake-quiz">Làm bài kiểm tra</button>
+
+            </div>
+
+        </section>
+
+
+        <section class="popular-directorya-area section-padding fix">
+            <div class="container row">
+                <div class="col-sm-12 col-md-2">
+
+                </div>
+                <div class="col-sm-12 col-md-10 ">
+                    <div class="row">
+                        <div class="section-tittle text-center mb-40">
+                            <h2>VN101</h2>
+                            <h2>Câu hỏi về Việt Nam</h2>
+                            <p>4 câu hỏi trắc nghiệm</p>
+                        </div>
+                    </div>
+                    <div class="row" id="quiz-test-box">
+
+
+                    </div>
+                    <div class="row quiz-submit-button">
+                        <button class="btn" id="submit-button">Submit</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+    </main>
+    @Html.Partial("~/Views/Shared/_Footer.cshtml")
+    <div id="back-top">
+        <a class="wrapper" title="Go to Top" href="#">
+            <div class="arrows-container">
+                <div class="arrow arrow-one">
+                </div>
+                <div class="arrow arrow-two">
+                </div>
+            </div>
+        </a>
+    </div>
+
+
+
+    <script src="~/Assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="~/Assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Assets/js/popper.min.js"></script>
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+
+    <script src="~/Assets/js/owl.carousel.min.js"></script>
+    <script src="~/Assets/js/slick.min.js"></script>
+    <script src="~/Assets/js/jquery.slicknav.min.js"></script>
+
+    <script src="~/Assets/js/wow.min.js"></script>
+    <script src="~/Assets/js/jquery.magnific-popup.js"></script>
+    <script src="~/Assets/js/jquery.nice-select.min.js"></script>
+    <script src="~/Assets/js/jquery.counterup.min.js"></script>
+    <script src="~/Assets/js/waypoints.min.js"></script>
+
+    <script src="~/Assets/js/contact.js"></script>
+    <script src="~/Assets/js/jquery.form.js"></script>
+    <script src="~/Assets/js/jquery.validate.min.js"></script>
+    <script src="~/Assets/js/mail-script.js"></script>
+    <script src="~/Assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <script src="~/Assets/js/plugins.js"></script>
+    <script src="~/Assets/js/main.js"></script>
+    <script src="~/Assets/js/quiz-test.js"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script>
+        window.onload = async () => {
+            await $.get("@ViewBag.apiLink", (data) => {
+                terms = data;
+                recomendAmount = terms.length < 20 ? terms.length : 20;
+                document.getElementById("quiz-amount-number").innerText = terms.length;
+                $("#quiz-amount-input").val(recomendAmount);
+                let quizs = getRandomTermsByNumber(terms, recomendAmount);
+                $("#quiz-test-box").html(getQuestionByDefinition(quizs).map((el, index) => getQuestion(index + 1, el.quizId, el.question, el.answers)).join("\n"));
+            });
+        }
+    </script>
+</body>
+
+<!-- Mirrored from preview.colorlib.com/theme/onedu/courses.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 28 Mar 2021 14:04:49 GMT -->
+
+</html>

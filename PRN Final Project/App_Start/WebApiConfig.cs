@@ -21,11 +21,7 @@ namespace PRN_Final_Project
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            config.Routes.MapHttpRoute(
-                name: "QuizAPI",
-                routeTemplate: "api/quiz/{id}",
-                defaults: new { controller="QuizAPIController", action="Get", id = RouteParameter.Optional }
-            );
+
 
             config.Formatters.JsonFormatter.SupportedMediaTypes
             .Add(new MediaTypeHeaderValue("text/html"));

@@ -45,5 +45,10 @@ namespace PRN_Final_Project.DAO
         /// <param name="access"></param>
         /// <returns></returns>
         int AddQuiz(string username, string quizName, string quizDes, int access);
+
+
+        bool CanAccess(string username, int quiz);
+
+        bool CanEdit(string username, int quiz);
     }
 }

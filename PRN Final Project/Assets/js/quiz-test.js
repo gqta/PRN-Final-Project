@@ -1,3 +1,6 @@
+
+let terms = [];
+let recomendAmount = terms.length < 20 ? terms.length : 20;
 // this function return a html presentation for a quiz
 /*
 *  @param index index for question
@@ -110,23 +113,20 @@ function getQuestionByDefinition(terms) {
 }
 
 function getRandomTermsByNumber(terms, amount) {
-    if (amount >= terms.length) {
-        return terms;
-    } else {
+    amount = amount > terms.length ? terms.length : amount;
         let termList = [];
 
         for (let i = 0; i < terms.length; i++) {
-            termList.splice(Math.round(Math.random() * i), 0, terms[i]);
+            let id = Math.round(Math.random() * i);
+            termList.splice(id, 0, terms[i]);
         }
         return termList.slice(0, amount);
-    }
 }
+
+
 
 $(document).ready(() => {
 
-    const terms = [{ "termID": 4, "key": "Hòa Lạc", "definition": "Bún bò ngon nhất là ở đâu ?" }, { "termID": 5, "key": "Thanh Hóa", "definition": "Nem chua có xuất sứ ở đâu ?" }, { "termID": 6, "key": "Vũng Tàu", "definition": "Nơi nào sau đây ở Việt Nam có vùng biển được bình chọn là đẹp nhất năm 2018 ?" }, { "termID": 7, "key": "Hà Nội", "definition": "Đâu là thử đô của Việt Nam ?" }, { "termID": 74, "key": "Sóc Trăng", "definition": "Bánh Pía là đặc sản của tỉnh nào sau đây?" }, { "termID": 76, "key": "Đà Lạt", "definition": "Bánh tráng nướng là món ăn nổi tiếng nhất ở địa phương nào?" }, { "termID": 77, "key": "Lẩu mắm", "definition": "U Minh nổi tiếng với món đặc sản nào sau đây? " }, { "termID": 78, "key": "Vũng Tàu", "definition": "Bánh khọt là đặc sản của tỉnh:" }, { "termID": 79, "key": "Đồng Tháp", "definition": "Các món ăn về chuột đồng không thể bỏ lỡ khi bạn đến với tỉnh thành nào? " }, { "termID": 80, "key": "Gỏi lá sầu đâu", "definition": "Châu Đốc, An Giang nổi tiếng với món gỏi nào sao đây?" }, { "termID": 81, "key": "Bình Thuận", "definition": "Món bánh xèo là đặc sản nổi tiếng của địa phương nào dưới đây?" }, { "termID": 83, "key": "Nha Trang", "definition": "Bạn có thể tìm thấy món bún sứa thơm ngon ở vùng nào sau đây?" }, { "termID": 84, "key": "Đắk Nông", "definition": "Cá lăng nướng than là món ăn đặc trưng của vùng nào sau đây?" }, { "termID": 85, "key": "Bún chả cá", "definition": "Nói đến Đà Nẵng thì đặc sản đầu tiên phải kể đến đó chính là:" }, { "termID": 86, "key": "Bánh đa cua", "definition": " Nhắn đến đặc sản đất cảng Hải Phòng, không thể không kể đến món nào dưới đây? " }, { "termID": 87, "key": "Nam Định", "definition": "Bún đũa là đặc sản của tỉnh:" }, { "termID": 88, "key": "Ninh Bình", "definition": "Cơm cháy là đặc sản nổi tiếng của vùng địa phương nào dưới đây?" }, { "termID": 89, "key": " Bánh bèo", "definition": "Tên gọi của món đặc sản nổi tiếng đất Huế dưới đây là:" }, { "termID": 90, "key": "Thanh Hóa", "definition": " Nem chua là đặc sản của tỉnh nào?" }, { "termID": 91, "key": "Hà Nội", "definition": "Đâu là địa danh nổi tiếng với món phở gà?" }];
-
-    let recomendAmount = terms.length < 20 ? terms.length : 20;
 
     let quizs = getRandomTermsByNumber(terms, recomendAmount);
 
