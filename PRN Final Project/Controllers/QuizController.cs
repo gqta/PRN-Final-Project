@@ -98,6 +98,22 @@ namespace PRN_Final_Project.Controllers
                 return View();
             }
         }
+        public ActionResult DeleteQuiz()
+        {
+
+            if (!String.IsNullOrEmpty(Request["id"]))
+            {
+                ViewBag.user = Request.Cookies["user"];
+                QuizDAO quizDAO = new QuizDAOImpl();
+                if (quizDAO.DeleteQuiz(int.Parse(Request["id"])))
+                {
+                    return Redirect("/quiz/course");
+                }
+
+            }
+            return View();
+        }
+       
         public ActionResult Search()
         {
             ViewBag.Result = new List<Quiz>();

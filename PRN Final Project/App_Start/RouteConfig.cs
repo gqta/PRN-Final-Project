@@ -110,6 +110,11 @@ namespace PRN_Final_Project
                 defaults: new { controller = "Error", action = "NotFound", id = UrlParameter.Optional }
             );
 
+            routes.MapRoute(
+               name: "DeleteQuiz",
+               url: "quiz/delete",
+               defaults: new { controller = "Quiz", action = "DeleteQuiz", id = UrlParameter.Optional }
+           );
         }
     }
 }

@@ -92,10 +92,11 @@
                             @{
                                 if (ViewBag.user.Value.ToString().Equals(new UserDAOImpl().getAccountByQuizId(ViewBag.quiz.QuizId)))
                                 {
-                                    <div class="col-sm-12 col-md-11"><a style="color : #4BB236; text-align : right;" href="~/quiz/edit?id=@ViewBag.quiz.QuizId"><h5>Chỉnh Sửa</h5></a></div>
+                                    <div class="col-sm-12 col-md-11"><a style="color : #4BB236; text-align : right;" href="/quiz/edit?id=@ViewBag.quiz.QuizId"><h5>Chỉnh Sửa</h5></a></div>
+                                    <div class="col-sm-12 col-md-11"><a style="color : #4BB236; text-align : right;" href="/quiz/delete?id=@ViewBag.quiz.QuizId"><h5>Xóa</h5></a></div>
                                 }
-                                                }
-                                            </div>
+                            }
+                        </div>
                     </div>
                     </div>
                     <div class="row">
@@ -188,6 +189,11 @@
         gtag('js', new Date());
 
         gtag('config', 'UA-23581568-13');
+    </script>
+    <script>
+        function confirmDelete(el) {
+            let cm = confirm("Bạn có chắc chắn muốn xóa thuật ngữ ?");
+        }
     </script>
 </body>
 
