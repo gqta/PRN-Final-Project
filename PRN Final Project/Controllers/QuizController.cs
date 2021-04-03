@@ -144,7 +144,7 @@ namespace PRN_Final_Project.Controllers
             }
             catch (Exception ex)
             {
-                return View();
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
 

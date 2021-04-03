@@ -127,11 +127,10 @@ namespace PRN_Final_Project.DAO.Impl
         public int AddQuiz(string username, string quizName, string quizDes, int access)
         {
 
-            string sql = "INSERT INTO [dbo].[Quiz] VALUES " +
+            string sql = "INSERT INTO [dbo].[Quiz]([username],[quizName],[quizDescription],[access]) values" +
            "(@userName" +
            ", @quizName" +
            ", @quizDes" +
-           ", GETDATE()" +
            ", @access)";
             SqlParameter[] parameter = new SqlParameter[] {
                 new SqlParameter("@username",SqlDbType.VarChar),
