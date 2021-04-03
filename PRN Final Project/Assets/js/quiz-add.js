@@ -1,5 +1,6 @@
 function getAddField(index) {
-    return `<div class="row quiz-add-item">
+    return
+`<div class="row quiz-add-item">
     <div class="row quiz-add-item-control">
         <div class="col-sm-12 col-md-6 quiz-item-count">
             <h3>${index}</h3>
@@ -10,11 +11,11 @@ function getAddField(index) {
     </div>
     <div class="row">
         <div class="col-sm-12 col-md-6 quiz-add-input-field">
-            <input type="text" name="key" placeholder="" value="">
+            <input type="text" name="key" placeholder="" required>
             <label for="">Thuật ngữ</label>
         </div>
         <div class="col-sm-12 col-md-6 quiz-add-input-field">
-            <input type="text" name="value" placeholder="" value="">
+            <input type="text" name="value" placeholder="" required>
             <label for="">Định nghĩa</label>
         </div>
     </div>
@@ -40,11 +41,11 @@ function getAddField(index, term, definition) {
     </div>
     <div class="row">
         <div class="col-sm-12 col-md-6 quiz-add-input-field">
-            <input type="text" name="" placeholder="" value="${term}">
+            <input type="text" name="key" placeholder="" value="${term}">
             <label for="">Thuật ngữ</label>
         </div>
         <div class="col-sm-12 col-md-6 quiz-add-input-field">
-            <input type="text" name="" placeholder="" value="${definition}">
+            <input type="text" name="value" placeholder="" value="${definition}">
             <label for="">Định nghĩa</label>
         </div>
     </div>
@@ -73,9 +74,9 @@ function viewDemo() {
         card.forEach((el, index) => {
             let te_de = el.split(teDevide);
 
-            if(te_de > 1){
+            if (te_de > 1) {
                 $("#quiz-add-container-demo").append(getAddField(index + 1, te_de[0], te_de.slice(1, te_de.length).join(teDevide)));
-            }else{
+            } else {
                 $("#quiz-add-container-demo").append(getAddField(index + 1, te_de[0], ""));
             }
         })

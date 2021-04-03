@@ -1,7 +1,9 @@
-﻿@using PRN_Final_Project.Models
+﻿
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = "EditCourse";
 }
+@using PRN_Final_Project.Models
+@using PRN_Final_Project.DAO.Impl
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -35,11 +37,11 @@
     </header>
     <main>
 
-        <form action="~/quiz/add" method="post" onsubmit="Alert()">
+        <form action="~/quiz/edit?id=@ViewBag.quiz.QuizId" method="post">
             <div class="row  quiz-add-header-sticky">
                 <div class="col-sm-6 col-md-6 quiz-add-header">
-                    <h3>Tạo học phần mới</h3>
-                    <p><span id="term-amount">2</span> thuật ngữ</p>
+                    <h3>Học phần của bạn</h3>
+                    <p><span id="term-amount">@ViewBag.Result.Count</span> thuật ngữ</p>
                 </div>
                 <div class="col-sm-6 col-md-6">
                     <button class="btn quiz-add-button" type="submit" name="submit" value="Add">Lưu</button>
@@ -53,12 +55,12 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="quiz-add-header-field">
-                                    <input type="text" name="title" id="quiz-add-header" placeholder="Nhập tiêu đề - ví dụ VNI" required>
+                                    <input type="text" name="title" id="quiz-add-header" value="@ViewBag.quiz.QuizName" placeholder="Nhập tiêu đề - ví dụ VNI" required>
                                     <label for="">Tiêu đề</label>
                                 </div>
                                 <div class="quiz-add-header-field">
                                     <input type="text" name="description" id="quiz-add-description"
-                                           placeholder="Nhập mô tả - Việt Nam thật đẹp" required>
+                                           value="@ViewBag.quiz.QuizDescription"placeholder="Nhập mô tả - Việt Nam thật đẹp" required>
                                     <label for="">Mô tả</label>
                                 </div>
                             </div>
@@ -83,50 +85,34 @@
                         </div>
 
                         <div class="quiz-add-container" id="quiz-add-container">
+                            
+                            @for (int i = 0; i < ViewBag.Result.Count; i++)
+                            {
+                                <div class="row quiz-add-item">
+                                    <div class="row quiz-add-item-control">
+                                        <div class="col-sm-12 col-md-6 quiz-item-count">
+                                            <h3>@(i+1)</h3>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 quiz-item-delete">
+                                            <button disabled title="Xóa thuật ngữ"><i class="fas fa-trash-alt"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6 quiz-add-input-field">
+                                            <input type="text" name="key" value="@ViewBag.Result[i].Key" placeholder="" required>
+                                            <label for="">Thuật ngữ</label>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 quiz-add-input-field">
+                                            <input type="text" name="value" value="@ViewBag.Result[i].Definition" placeholder="" required>
+                                            <label for="">Định nghĩa</label>
+                                        </div>
+                                    </div>
 
-                            <div class="row quiz-add-item">
-                                <div class="row quiz-add-item-control">
-                                    <div class="col-sm-12 col-md-6 quiz-item-count">
-                                        <h3>1</h3>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 quiz-item-delete">
-                                        <button disabled title="Xóa thuật ngữ"><i class="fas fa-trash-alt"></i></button>
-                                    </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-6 quiz-add-input-field">
-                                        <input type="text" name="key" placeholder="" required>
-                                        <label for="">Thuật ngữ</label>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 quiz-add-input-field">
-                                        <input type="text" name="value" placeholder="" required>
-                                        <label for="">Định nghĩa</label>
-                                    </div>
-                                </div>
+                            }
 
-                            </div>
 
-                            <div class="row quiz-add-item">
-                                <div class="row quiz-add-item-control">
-                                    <div class="col-sm-12 col-md-6 quiz-item-count">
-                                        <h3>2</h3>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 quiz-item-delete">
-                                        <button disabled title="Xóa thuật ngữ"><i class="fas fa-trash-alt"></i></button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-6 quiz-add-input-field">
-                                        <input type="text" name="key" placeholder="" required>
-                                        <label for="">Thuật ngữ</label>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 quiz-add-input-field">
-                                        <input type="text" name="value" placeholder="" required>
-                                        <label for="">Định nghĩa</label>
-                                    </div>
-                                </div>
 
-                            </div>
 
                         </div>
                         <div class="row quiz-add-item-button">
@@ -203,20 +189,18 @@
     <script src="/Assets/js/quiz-add.js"></script>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'UA-23581568-13');
-    </script>
-    <script>
-        function Alert() {
-            alert("Thêm bộ câu hỏi thành công!");
+        function confirmDelete() {
+            let cm = confirm("Bạn có chắc chắn muốn xóa thuật ngữ ?");
+            if (cm) {
+                 
+            }
         }
     </script>
-    
 </body>
 
 <!-- Mirrored from preview.colorlib.com/theme/onedu/courses.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 28 Mar 2021 14:04:49 GMT -->
 
 </html>
+

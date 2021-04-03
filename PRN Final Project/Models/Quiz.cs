@@ -13,7 +13,6 @@ namespace PRN_Final_Project.Models
         private string quizDescription;
         private DateTime createdDate;
         private int termAmount;
-
         public Quiz()
         {
 

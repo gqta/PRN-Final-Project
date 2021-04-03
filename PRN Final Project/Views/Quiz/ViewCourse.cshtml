@@ -1,6 +1,11 @@
-﻿@using PRN_Final_Project.Models
+﻿
 @{
-    ViewBag.Title = "Search";
+    ViewBag.Title = "ViewCourse";
+}
+@using PRN_Final_Project.Models
+@using PRN_Final_Project.DAO.Impl
+@{
+    ViewBag.Title = "ViewQuiz";
 }
 
 <!doctype html>
@@ -11,7 +16,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Search</title>
+    <title>Quiz</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="/Assets/img/icon/favicon.png">
@@ -19,6 +24,7 @@
     <link rel="stylesheet" href="/Assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/Assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/Assets/css/slicknav.css">
+    <link rel="stylesheet" href="/Assets/css/flaticon.css">
     <link rel="stylesheet" href="/Assets/css/animate.min.css">
     <link rel="stylesheet" href="/Assets/css/magnific-popup.css">
     <link rel="stylesheet" href="/Assets/css/fontawesome-all.min.css">
@@ -30,9 +36,7 @@
 </head>
 
 <body>
-
     @Html.Partial("~/Views/Shared/_Header.cshtml")
-
     <main>
 
         <div class="hero-area slider-area">
@@ -41,12 +45,12 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="hero-cap">
-                                <h2>Học phần của bạn</h2>
+                                <h2>Học phần của @ViewBag.quiz.Creator</h2>
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
-                                        <li class="breadcrumb-item"><a href="#">Search</a></li>
-                                        <li class="breadcrumb-item"><a href="#">@Request["keyword"]</a></li>
+                                        <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Học phần của @ViewBag.quiz.Creator</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Quiz</a></li>
                                     </ol>
                                 </nav>
                             </div>
@@ -56,75 +60,62 @@
             </div>
         </div>
 
-
+        {
         <section class="popular-directorya-area section-padding fix">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-
                         <div class="section-tittle text-center mb-40">
-                            <h2>Kết quả cho "@Request["keyword"]"</h2>
-                            <p>Đã tìm thấy @ViewBag.Result.Count kết quả</p>
+                            <h2>@ViewBag.quiz.QuizDescription</h2>
+                            <!-- <p>Choose from 130,000 online video courses with new additions published every month</p> -->
+                            <br>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12 col-md-2">
-
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-3">
+                        <a href="learn.html" class="btn btn-success quiz-button">Học </a>
                     </div>
-                    <div class="col-sm-12 col-md-8">
-                        @if (ViewBag.Result.Count > 0)
-                        {
-                            foreach (Quiz quiz in ViewBag.Result)
-                            {
-                                <div class="row quiz-search-item">
-                                    <div class="row quiz-item-overview">
-                                        <div class="col-sm-3 quiz-search-amount">
-                                            @quiz.TermAmount Thuật ngữ
-                                        </div>
-                                        <div class="col-sm-3 quiz-search-author">
-                                            by <a href="~/quiz/course">@quiz.Creator</a>
-                                        </div>
-                                        <div class="col-sm-3 quiz-rating">
-
-                                        </div>
-                                        <div class="col-sm-3 quiz-view">
-
-                                        </div>
-                                    </div>
-                                    <div class="row quiz-item-info">
-                                        <div class="col-sm-2">
-                                            <h3><a href="~/quiz/detail?id=@quiz.QuizId">@quiz.QuizName</a></h3>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <p>@quiz.QuizDescription</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            }
-                        }
-                        else
-                        {
-                            <br />
-                            <h3 style="text-align: center">Không có kết quả nào được tìm thấy</h3>
-                        }
-
-
-
+                    <div class="col-sm-3">
+                        <a href="test.html" class="btn btn-success quiz-button">Kiểm Tra </a>
                     </div>
-                    <div class="col-sm-12 col-md-2">
-                    </div>
-
-
-
+                    <div class="col-sm-3"></div>
                 </div>
+                <div class="row term-container">
+                    <div class="quiz-section-title row">
+                        <div class="col-sm-12 col-md-6"><h2>Thuật ngữ trong học phần(@ViewBag.Result.Count)</h2></div>
+                    </div>
+                    <div class="row">
+                        <br/>
+                    </div>
+                    <div class="row">
+                        <br />
+                    </div>
+                </div>
+                @{
+                    if (ViewBag.user.Value.ToString().Equals(new UserDAOImpl().getAccountByQuizId(ViewBag.quiz.QuizId)))
+                    {
+                        <div class="col-sm-12 col-md-11"><a style="color : #4BB236; text-align : right;" href="~/quiz/edit?id=@ViewBag.quiz.QuizId"><h5>Chỉnh Sửa</h5></a></div>
+                    }
+                }
+
+
+                @foreach (Term term in ViewBag.Result)
+                {
+                    <div class="row quiz-term">
+                        <div class="col-sm-6 term-content rank-well">@term.Key</div>
+                        <div class="col-sm-6 term-definition">@term.Definition</div>
+                    </div>
+                }
+
+            </div>
 
         </section>
-
+        }
     </main>
     <footer>
-        <div class="footer-area ">
+        <div class="footer-area">
             <div class="footer-wrapper ">
 
                 <div class="footer-bottom-area">
@@ -162,29 +153,29 @@
     </div>
 
 
-    <script src="/Assets/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="/Assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="/Assets/js/popper.min.js"></script>
-    <script src="/Assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
 
-    <script src="/Assets/js/owl.carousel.min.js"></script>
-    <script src="/Assets/js/slick.min.js"></script>
-    <script src="/Assets/js/jquery.slicknav.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/slick.min.js"></script>
+    <script src="assets/js/jquery.slicknav.min.js"></script>
 
-    <script src="/Assets/js/wow.min.js"></script>
-    <script src="/Assets/js/jquery.magnific-popup.js"></script>
-    <script src="/Assets/js/jquery.nice-select.min.js"></script>
-    <script src="/Assets/js/jquery.counterup.min.js"></script>
-    <script src="/Assets/js/waypoints.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.js"></script>
+    <script src="assets/js/jquery.nice-select.min.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
 
-    <script src="/Assets/js/contact.js"></script>
-    <script src="/Assets/js/jquery.form.js"></script>
-    <script src="/Assets/js/jquery.validate.min.js"></script>
-    <script src="/Assets/js/mail-script.js"></script>
-    <script src="/Assets/js/jquery.ajaxchimp.min.js"></script>
+    <script src="assets/js/contact.js"></script>
+    <script src="assets/js/jquery.form.js"></script>
+    <script src="assets/js/jquery.validate.min.js"></script>
+    <script src="assets/js/mail-script.js"></script>
+    <script src="assets/js/jquery.ajaxchimp.min.js"></script>
 
-    <script src="/Assets/js/plugins.js"></script>
-    <script src="/Assets/js/main.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/main.js"></script>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
     <script>

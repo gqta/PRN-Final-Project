@@ -157,6 +157,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MailHelper.cs" />
     <Compile Include="Models\Progress.cs" />
     <Compile Include="Models\Quiz.cs" />
     <Compile Include="Models\Term.cs" />
@@ -271,6 +272,7 @@
     <Content Include="Assets\js\quiz-add.js" />
     <Content Include="Assets\js\quiz-learn.js" />
     <Content Include="Assets\js\quiz-test.js" />
+    <Content Include="Assets\js\regexJs.js" />
     <Content Include="Assets\js\slick.min.js" />
     <Content Include="Assets\js\vendor\jquery-1.12.4.min.js" />
     <Content Include="Assets\js\vendor\modernizr-3.5.0.min.js" />
@@ -319,9 +321,11 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Quiz\Add.cshtml" />
+
     <Content Include="Views\Quiz\Test.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Quiz\Learn.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -32,7 +32,7 @@ namespace PRN_Final_Project
             routes.MapRoute(
               name: "Forget Password",
               url: "user/forgotpassword",
-              defaults: new { controller = "User", action = "ForgotPassword", id = UrlParameter.Optional }
+              defaults: new { controller = "User", action = "ForgotPassword" }
           );
             routes.MapRoute(
                 name: "Login",
@@ -52,7 +52,7 @@ namespace PRN_Final_Project
             routes.MapRoute(
               name: "ChangePassword",
               url: "changepassword",
-              defaults: new { controller = "User", action = "ChangePassword" }
+              defaults: new { controller = "User", action = "ChangePass" }
           );
 
             routes.MapRoute(
@@ -61,9 +61,25 @@ namespace PRN_Final_Project
                 defaults: new { controller = "User", action = "Register" }
             );
             routes.MapRoute(
-                name: "AddQuiz",
-                url: "quiz/add",
-                defaults: new { controller = "Quiz", action = "Add", id = UrlParameter.Optional }
+
+                name: "ActivationMail",
+                url: "activation",
+                defaults: new { controller = "User", action = "ActivationMail" }
+
+//                 name: "AddQuiz",
+//                 url: "quiz/add",
+//                 defaults: new { controller = "Quiz", action = "Add", id = UrlParameter.Optional }
+//             );
+//             routes.MapRoute(
+//                 name: "ViewCourse",
+//                 url: "quiz/detail",
+//                 defaults: new { controller = "Quiz", action = "ViewCourse", id = UrlParameter.Optional }
+//             );
+//             routes.MapRoute(
+//                 name: "EditCourse",
+//                 url: "quiz/edit",
+//                 defaults: new { controller = "Quiz", action = "EditCourse", id = UrlParameter.Optional }
+
             );
             routes.MapRoute(
                 name: "TestQuiz",
