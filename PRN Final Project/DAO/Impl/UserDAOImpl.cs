@@ -50,6 +50,25 @@ namespace PRN_Final_Project.DAO.Impl
             return ExecuteSQL(sql, parameter) > 0;
         }
 
+        public bool ChangePassword(string username, string password)
+        {
+
+            string sql = "UPDATE [dbo].[User] SET[password] = @pass WHERE[username] = @user";
+
+            string md5Password = CreateMD5(username.ToLower() + "_" + password);
+
+            SqlParameter[] parameter = new SqlParameter[]
+            {
+                new SqlParameter("@user", SqlDbType.VarChar),
+                new SqlParameter("@pass", SqlDbType.VarChar),
+            };
+
+            parameter[0].Value = username;
+            parameter[1].Value = md5Password;
+
+            return ExecuteSQL(sql, parameter) > 0;
+        }
+
         public string ForgotPassword(string username, string email)
         {
 

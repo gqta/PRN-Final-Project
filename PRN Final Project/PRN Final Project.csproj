@@ -140,6 +140,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuizAPIController.cs" />
     <Compile Include="Controllers\QuizController.cs" />
@@ -158,7 +159,6 @@
     </Compile>
     <Compile Include="Models\MailHelper.cs" />
     <Compile Include="Models\Progress.cs" />
-    <Compile Include="Models\ProgressDetail.cs" />
     <Compile Include="Models\Quiz.cs" />
     <Compile Include="Models\Term.cs" />
     <Compile Include="Models\User.cs" />
@@ -321,14 +321,10 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Quiz\Add.cshtml" />
-    <Content Include="Views\Quiz\Course.cshtml" />
 
-    <Content Include="Views\User\ForgotPassword.cshtml" />
-    <Content Include="Views\User\ChangePass.cshtml" />
-    <Content Include="Views\User\ActivationMail.cshtml" />
-=======
-<!--     <Content Include="Views\Quiz\EditCourse.cshtml" />
-    <Content Include="Views\Quiz\ViewCourse.cshtml" /> -->
+    <Content Include="Views\Quiz\Test.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Quiz\Learn.cshtml" />
 
   </ItemGroup>
   <ItemGroup>

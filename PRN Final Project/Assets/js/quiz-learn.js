@@ -1,163 +1,96 @@
-const quiz = {
-    amount: 4,
-    data: {
-        "111": {
-            term: "Thanh Hóa",
-            definition: "Nem chua là đặc sản của khu vực nào?"
-        },
-        "112": {
-            term: "Hà Nội",
-            definition: "Đâu là thủ đo của nước việt nam?"
-        },
-        "113": {
-            term: "Hải Dương",
-            definition: "Đâu là quê hương của bánh đậu xanh?"
-        },
-        "114": {
-            term: "Hòa Lạc",
-            definition: "Bún Bò nào là ngon nhất?"
-        }
-    }
-};
+let quiz = [];
 
 let current = 0;
+let resetAPI = "";
+let SetAPI = "";
 
-let quizList = genQuizByDefinition(quiz.data);
-
+let quizList = getQuestionByKey(quiz);
 /**
- * 
- * @param {*} quizData 
- * @returns a array of quiz by format 
- *          {
-                quizId: id,
-                question: definition,
-                answers : array of term
-            }
+ * get quiz list by using key as key as question and values as answers
+ * @param {*} terms is a aarray contain quiz
  */
-function genQuizByDefinition(quizData) {
-    let allTerms = [];
-    for (const id in quizData) {
-        if (Object.hasOwnProperty.call(quizData, id)) {
-            const element = quizData[id];
+function getQuestionByKey(terms) {
+    let answers = [];
 
-            if (allTerms.indexOf(element.term) == -1) {
-                allTerms.push(element.term);
-            }
-
+    // get unique definition 
+    terms.forEach(el => {
+        if (answers.indexOf(el.definition) == -1) {
+            answers.push(el.definition)
         }
-    }
+    });
+    let quizs = terms.map((el) => {
 
-    let quizList = []; // this will contain quiz data for each element will under format {quizId, question, answers}
+        let numberOfAnswers = answers.length >= 4 ? 3 : answers.length - 1;
 
-    for (const id in quizData) {
-        if (Object.hasOwnProperty.call(quizData, id)) {
-            const element = quizData[id];
+        let quizAnswers = [el.definition];
 
-            let answerIndex = allTerms.indexOf(element.term);
+        for (let i = 0; i < numberOfAnswers;) {
 
-            let answers = [element.term];
+            let answer = answers[Math.round(Math.random() * (answers.length - 1))]; // lấy ra 1 đáp án ngẫu nhiên của phần từ answers list
 
-            let maxAnswer = allTerms.length - 1 >= 3 ? 3 : allTerms.length - 1;
-
-            for (let i = 0; i < maxAnswer;) {
-                let termId = Math.round(Math.random() * (allTerms.length - 1));
-                let term = allTerms[termId];
-
-                if (answers.indexOf(term) == -1) {
-                    answers.push(term);
-                    i++;
+            if (quizAnswers.indexOf(answer) == -1) {
+                if (Math.round(Math.random)) {
+                    quizAnswers.push(answer);
+                } else {
+                    quizAnswers.unshift(answer);
                 }
+                i++;
             }
-
-            
-
-            if (Math.round(Math.random())) {
-                quizList.push({
-                    quizId: id,
-                    question: element.definition,
-                    answers
-                });
-            } else {
-                quizList.unshift({
-                    quizId: id,
-                    question: element.definition,
-                    answers
-                });
-            }
-
         }
-    }
+        return {
+            "quizId": el.termID,
+            "question": el.key,
+            "answers": quizAnswers,
+        };
+    })
 
-    return quizList;
+    return quizs;
+
 }
 
 /**
  * 
- * @param {*} quizData 
- * @returns  a array of quiz by format 
- *          {
-                quizId: id,
-                question: a term,
-                answers: array of definition
-            }
+ * @param {*} terms 
+ * @returns 
  */
-function genQuizByTerm(quizData) {
-    let allDefinitions = [];
-    for (const id in quizData) {
-        if (Object.hasOwnProperty.call(quizData, id)) {
-            const element = quizData[id];
+function getQuestionByDefinition(terms) {
+    let answers = [];
 
-            if (allDefinitions.indexOf(element.definition) == -1) {
-                allDefinitions.push(element.definition);
-            }
-
+    // get unique definition 
+    terms.forEach(el => {
+        if (answers.indexOf(el.key) == -1) {
+            answers.push(el.key)
         }
-    }
+    });
+    let quizs = terms.map((el) => {
 
-    let quizList = []; // this will contain quiz data for each element will under format {quizId, question, answers}
+        let numberOfAnswers = answers.length >= 4 ? 3 : answers.length - 1;
 
-    for (const id in quizData) {
-        if (Object.hasOwnProperty.call(quizData, id)) {
-            const element = quizData[id];
+        let quizAnswers = [el.key];
 
-            let answerIndex = allDefinitions.indexOf(element.definition);
+        for (let i = 0; i < numberOfAnswers;) {
 
-            let answers = [element.definition];
+            let answer = answers[Math.round(Math.random() * (answers.length - 1))]; // lấy ra 1 đáp án ngẫu nhiên của phần từ answers list
 
-            let maxAnswer = allDefinitions.length - 1 >= 3 ? 3 : allDefinitions.length - 1;
-
-            for (let i = 0; i < maxAnswer;) {
-                let termId = Math.round(Math.random() * (allDefinitions.length - 1));
-                let term = allDefinitions[termId];
-
-                if (answers.indexOf(term) == -1) {
-                    answers.push(term);
-                    i++;
+            if (quizAnswers.indexOf(answer) == -1) {
+                if (Math.round(Math.random)) {
+                    quizAnswers.push(answer);
+                } else {
+                    quizAnswers.unshift(answer);
                 }
+                i++;
             }
-
-            if (Math.round(Math.random())) {
-                quizList.push({
-                    quizId: id,
-                    question: element.term,
-                    answers
-                });
-            } else {
-                quizList.unshift({
-                    quizId: id,
-                    question: element.term,
-                    answers
-                });
-            }
-
-            
-
         }
-    }
+        return {
+            "quizId": el.termID,
+            "question": el.definition,
+            "answers": quizAnswers,
+        };
+    })
 
-    return quizList;
+    return quizs;
+
 }
-
 function genQuiz(quiz) {
     let lable = "ABCD";
     return `<div class="question-box">
@@ -177,41 +110,52 @@ function genQuiz(quiz) {
 </div>`
 }
 
-function answer(el){
+function answer(el) {
     let result = el.getElementsByClassName("quiz-answer-content")[0].innerText;
-            let quizID = $("#quiz-id").val();
 
-            if (quiz.data[quizID].term.toLocaleLowerCase() == result.toLocaleLowerCase()) {
-                $("#quiz-modal-result").text("Đúng rùi nè!");
-                $("#quiz-modal-result").css("background", "green");
-                $("#quiz-modal-result").css("color", "white");
-                $("#question-box").html(genQuiz(quizList[++current%quizList.length]));
+    let isTrue = quiz[current].key.toLocaleLowerCase().trim() == result.toLocaleLowerCase().trim()
+        || quiz[current].definition.toLocaleLowerCase().trim() == result.toLocaleLowerCase().trim();
+
+    if (isTrue) {
+        $("#quiz-modal-result").text("Đúng rùi nè!");
+        $("#quiz-modal-result").css("background", "green");
+        $("#quiz-modal-result").css("color", "white");
+
+        $.get(SetAPI + "/" + (current + 1), (data) => {
+            console.log(data)
+            if (data && data.progress != undefined) {
+                current = data.progress;
             } else {
-                $("#quiz-modal-result").text("Sai rồi bạn tôi ơi! đọc kĩ lại chút nào!");
-                $("#quiz-modal-result").css("background", "red");
-                $("#quiz-modal-result").css("color", "white");
+                localStorage.setItem("current", current + 1);
             }
+        })
+
+        if (current + 1 == terms.length) {
+            $("#question-box").html(`<h1>Chúc mừng bạn đã học xong <br> Làm thêm nháy nữa cho nắm chắc</h1>`);
+        } else {
+            $("#question-box").html(genQuiz(quizList[++current % quizList.length]));
+        }
+
+    } else {
+        $("#quiz-modal-result").text("Sai rồi bạn tôi ơi! đọc kĩ lại chút nào!");
+        $("#quiz-modal-result").css("background", "red");
+        $("#quiz-modal-result").css("color", "white");
+    }
+
+    $("#quiz-result").text(`${current * 100.0 / quiz.length}%`)
 
 
-            $("#result").show();
+    $("#result").show();
 
-            setTimeout(() => {
-                $("#result").hide();
-            }, 2000);
+    setTimeout(() => {
+        $("#result").hide();
+    }, 2000);
 }
 
 
-$(document).ready(() => {
-    "use strict";
 
-    $("#question-box").html(genQuiz(quizList[current]));
 
-    
-    $("#btn-retake-quiz").click(()=>{
-        
-    });
 
-});
 
 
 

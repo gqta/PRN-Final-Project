@@ -21,6 +21,7 @@
                         <nav>
                             <ul id="navigation">
                                 <li><a href="/">Trang chủ</a></li>
+
                                 @if (Request.Cookies["user"] == null || String.IsNullOrEmpty(Request.Cookies["user"].Value))
                                 {
                                     <li>
@@ -28,6 +29,7 @@
                                     </li>
                                     <li>
                                         <a href="~/register" class="btn header-btn2">Đăng ký</a>
+
                                     </li>
                                 }
                                 else
@@ -39,6 +41,7 @@
                                     @*<li>
                                         Chào, @Request.Cookies["user"].Value.ToString()
 
+
                                     </li>*@
                                     <li>
                                         <div class="dropdown">
@@ -49,18 +52,8 @@
                                             </div>
                                         </div>
                                     </li>
-                                    @*<li>
 
-
-                                        <a href="~/changepassword" class="btn header-btn2">Change Password</a>
-                                    </li>
                                     <li>
-
-                                        <a href="~/logout" class="btn header-btn2">Logout</a>
-                                    </li>*@
-
-<!--                                         <a href="~/logout" class="btn header-btn2">Đăng Xuất</a>
-                                    </li> -->
 
                                 }
                             </ul>

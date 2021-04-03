@@ -15,7 +15,7 @@ namespace PRN_Final_Project.DAO
         /// </summary>
         /// <param name="progressID"></param>
         /// <returns></returns>
-        bool ResetProgress(int progressID);
+        Dictionary<string, int> ResetProgress(int progressID);
 
         /// <summary>
         /// Set Term Progress and return current progress 
@@ -24,7 +24,7 @@ namespace PRN_Final_Project.DAO
         /// <param name="termID"></param>
         /// <param name="progress"></param>
         /// <returns>< -frequency rank-> and progress [{"good": 2}, {"default": 1}]</returns>
-        Dictionary<string, int> SetTermProgress(int progressID, int termID, int progress);
+        Dictionary<string, int> SetProgress(int progressID, int progress);
 
         /// <summary>
         /// Get current learn progress
@@ -32,7 +32,12 @@ namespace PRN_Final_Project.DAO
         /// <param name="username"></param>
         /// <param name="quizID"></param>
         /// <returns>include < -frequency rank-> and progress </frequency></returns>
-        Dictionary<string, int> GetLearnProgress(string username, int quizID);
+        int GetLearnProgress(string username, int quizID);
+        int StartLearnProgress(string username, int quizID);
+
+
+
+        Dictionary<string, int> GetLearnProgress(int progressID);
 
     }
 }

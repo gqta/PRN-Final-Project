@@ -148,5 +148,62 @@ namespace PRN_Final_Project.Controllers
         }
 
 
+
+        public ActionResult Test(int id)
+        {
+            string username = Request.Cookies["user"] == null?null: Request.Cookies["user"].Value;
+
+            if(new QuizDAOImpl().CanAccess(username, id))
+            {
+                if (String.IsNullOrEmpty(username))
+                {
+                    ViewBag.apiLink = String.Format("/api/quiz/{0}", id);
+                }
+                else
+                {
+                    ViewBag.apiLink = String.Format("/api/quiz/{0}/{1}",username, id);
+                }
+
+                return View();
+            }
+            else
+            {
+                return Redirect("/error/404");
+            }
+            
+            
+        }
+
+        public ActionResult Learn(int id)
+        {
+            string username = Request.Cookies["user"] == null ? null : Request.Cookies["user"].Value;
+
+            if (new QuizDAOImpl().CanAccess(username, id))
+            {
+                if (String.IsNullOrEmpty(username))
+                {
+                    ViewBag.apiLink = String.Format("/api/quiz/{0}", id);
+                }
+                else
+                {
+                    ViewBag.apiLink = String.Format("/api/quiz/{0}/{1}", username, id);
+                    ProgressDAO pro = new ProgressDAOImpl();
+                    int progress = pro.GetLearnProgress(username, id);
+                    ViewBag.ProgressAPI = "/api/progress/"+progress;
+                    ViewBag.ResetProgressAPI = "/api/progress/reset/" + progress;
+                    ViewBag.SetProgressAPI = "/api/progress/update/" + progress;
+                }
+            }
+            else
+            {
+                return Redirect("/error/404");
+            }
+
+            return View();
+        }
+
+
     }
+
+    
 }

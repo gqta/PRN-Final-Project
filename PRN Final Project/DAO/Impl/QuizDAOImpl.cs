@@ -32,7 +32,7 @@ namespace PRN_Final_Project.DAO.Impl
                     QuizName = row["QuizName"].ToString(),
                     QuizDescription = row["QuizDescription"].ToString(),
                     CreatedDate = DateTime.Parse(row["CreatedDate"].ToString()),
-                    TermAmount = row["amount"]==null? 0 : int.Parse(row["amount"].ToString()),
+                    TermAmount = row["amount"] == null ? 0 : int.Parse(row["amount"].ToString()),
                 });
             }
             return lst;
@@ -127,11 +127,11 @@ namespace PRN_Final_Project.DAO.Impl
         public int AddQuiz(string username, string quizName, string quizDes, int access)
         {
 
-            string sql = "INSERT INTO [dbo].[Quiz] VALUES "+
-           "(@userName"+
-           ", @quizName"+
-           ", @quizDes"+
-           ", GETDATE()"+
+            string sql = "INSERT INTO [dbo].[Quiz] VALUES " +
+           "(@userName" +
+           ", @quizName" +
+           ", @quizDes" +
+           ", GETDATE()" +
            ", @access)";
             SqlParameter[] parameter = new SqlParameter[] {
                 new SqlParameter("@username",SqlDbType.VarChar),
@@ -143,9 +143,46 @@ namespace PRN_Final_Project.DAO.Impl
             parameter[1].Value = quizName;
             parameter[2].Value = quizDes;
             parameter[3].Value = access;
-            DataTable data = GetDataBySQL(sql,parameter);
+            DataTable data = GetDataBySQL(sql, parameter);
             return int.Parse(data.Rows[0]["quizId"].ToString());
 
+        }
+
+
+        public bool CanAccess(string username, int quiz)
+        {
+            username = username == null ? "" : username;
+            string sql = "select username, access from Quiz where quizId = @id";
+            SqlParameter parameter = new SqlParameter("@id", SqlDbType.Int);
+            parameter.Value = quiz;
+
+            DataTable data = GetDataBySQL(sql, parameter);
+
+            if (data.Rows.Count == 0) return false;
+
+            else
+            {
+                int access = Convert.ToInt32(data.Rows[0]["access"].ToString());
+
+                string user = data.Rows[0]["username"].ToString();
+
+                return access > 0 || user.ToLower().Equals(username.ToLower());
+            }
+        }
+
+        public bool CanEdit(string username, int quiz)
+        {
+            string sql = "select username, access from Quiz where quizId = @id and username = @name";
+            SqlParameter[] parameter = new SqlParameter[] {
+                 new SqlParameter("@id", SqlDbType.Int),
+                 new SqlParameter("@name", SqlDbType.VarChar)
+            };
+
+            DataTable data = GetDataBySQL(sql, parameter);
+
+            if (data.Rows.Count == 0) return false;
+
+            else return true;
         }
     }
 }
