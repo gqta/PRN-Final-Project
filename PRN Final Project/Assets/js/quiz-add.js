@@ -1,21 +1,20 @@
 function getAddField(index) {
-    return
-`<div class="row quiz-add-item">
+    return `<div class="row quiz-add-item">
     <div class="row quiz-add-item-control">
         <div class="col-sm-12 col-md-6 quiz-item-count">
             <h3>${index}</h3>
         </div>
         <div class="col-sm-12 col-md-6 quiz-item-delete">
-            <button disabled title="Xóa thuật ngữ"><i class="fas fa-trash-alt"></i></button>
+        <div title="Xóa thuật ngữ" onclick="rebone(this)" style="float: right;"><i class="fas fa-trash-alt"></i></div>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12 col-md-6 quiz-add-input-field">
-            <input type="text" name="key" placeholder="" required>
+            <input type="text" name="key" placeholder="" value="">
             <label for="">Thuật ngữ</label>
         </div>
         <div class="col-sm-12 col-md-6 quiz-add-input-field">
-            <input type="text" name="value" placeholder="" required>
+            <input type="text" name="value" placeholder="" value="">
             <label for="">Định nghĩa</label>
         </div>
     </div>
@@ -41,11 +40,11 @@ function getAddField(index, term, definition) {
     </div>
     <div class="row">
         <div class="col-sm-12 col-md-6 quiz-add-input-field">
-            <input type="text" name="key" placeholder="" value="${term}">
+            <input type="text" name="" placeholder="" value="${term}">
             <label for="">Thuật ngữ</label>
         </div>
         <div class="col-sm-12 col-md-6 quiz-add-input-field">
-            <input type="text" name="value" placeholder="" value="${definition}">
+            <input type="text" name="" placeholder="" value="${definition}">
             <label for="">Định nghĩa</label>
         </div>
     </div>
@@ -94,4 +93,19 @@ $(document).ready(() => {
         $("#term-amount").text(amount);
         $("#quiz-add-container").append(getAddField(amount, "", ""));
     })
+
+    if (document.getElementsByClassName("quiz-add-item").length <= 2) {
+         $(".quiz-item-delete").hide();
+    } else {
+        $(".quiz-item-delete").enable();
+    }
 })
+
+
+function rebone(el) {
+
+    console.log(el.parentNode.parentNode.parentNode.remove());
+
+}
+
+

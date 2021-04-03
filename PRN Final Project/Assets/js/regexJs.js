@@ -1,4 +1,6 @@
-﻿let timeout;
+﻿
+
+let timeout;
 
 // traversing the DOM and getting the input and span using their IDs
 
@@ -28,7 +30,7 @@ function StrengthChecker(PasswordParameter) {
 function checkPass() {
     var pass = document.getElementById("password").value;
     var rpass = document.getElementById("repassword").value;
-    
+
 
     if (pass != rpass) {
         document.getElementById("submit").disabled = true;
@@ -45,31 +47,31 @@ function ValidateEmail() {
         document.getElementById("submit").disabled = true;
         $('.missmatch').text("You have entered an invalid email address!");
     }
- else {
+    else {
         $('.missmatch').text("");
-    document.getElementById("submit").disabled = false;
-}
-   
-
-
-// Adding an input event listener when a user types to the  password input 
-
-password.addEventListener("input", () => {
-
-    //The badge is hidden by default, so we show it
-
-    strengthBadge.style.display = 'block'
-    clearTimeout(timeout);
-
-    //We then call the StrengChecker function as a callback then pass the typed password to it
-
-    timeout = setTimeout(() => StrengthChecker(password.value), 500);
-
-    //Incase a user clears the text, the badge is hidden again
-
-    if (password.value.length !== 0) {
-        strengthBadge.style.display != 'block'
-    } else {
-        strengthBadge.style.display = 'none'
+        document.getElementById("submit").disabled = false;
     }
-});
+
+
+
+    // Adding an input event listener when a user types to the  password input 
+
+    password.oninput = () => {
+
+        //The badge is hidden by default, so we show it
+
+        strengthBadge.style.display = 'block'
+        clearTimeout(timeout);
+
+        //We then call the StrengChecker function as a callback then pass the typed password to it
+
+        timeout = setTimeout(() => StrengthChecker(password.value), 500);
+
+        //Incase a user clears the text, the badge is hidden again
+
+        if (password.value.length !== 0) {
+            strengthBadge.style.display != 'block'
+        } else {
+            strengthBadge.style.display = 'none'
+        }
+    }

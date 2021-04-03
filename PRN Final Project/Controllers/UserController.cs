@@ -135,6 +135,7 @@ Response.Cookies.Add(new HttpCookie("user", username));
                 return Redirect("ChangePassword");
 
             }
+            ViewBag.ErrorMessage = "Sai username hoac email";
             return View();
 
         }
