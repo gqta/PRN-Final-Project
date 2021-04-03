@@ -98,9 +98,13 @@ namespace PRN_Final_Project
                 defaults: new { controller = "User", action = "ActivationMail" }
                 );
 
-//                 
+            //                 
 
-
+            routes.MapRoute(
+               name: "DeleteQuiz",
+               url: "quiz/delete",
+               defaults: new { controller = "Quiz", action = "DeleteQuiz", id = UrlParameter.Optional }
+           );
 
 
 
