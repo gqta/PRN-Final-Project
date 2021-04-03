@@ -321,11 +321,15 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Quiz\Add.cshtml" />
-
     <Content Include="Views\Quiz\Test.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Quiz\Learn.cshtml" />
-
+    <Content Include="Views\Quiz\Course.cshtml" />
+    <Content Include="Views\Quiz\EditCourse.cshtml" />
+    <Content Include="Views\Quiz\ViewCourse.cshtml" />
+    <Content Include="Views\User\ActivationMail.cshtml" />
+    <Content Include="Views\User\ChangePass.cshtml" />
+    <Content Include="Views\User\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

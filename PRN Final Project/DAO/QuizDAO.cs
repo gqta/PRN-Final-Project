@@ -24,7 +24,9 @@ namespace PRN_Final_Project.DAO
         /// <returns>List of quiz</returns>
         List<Quiz> GetQuizByUser(string username);
 
-       
+        List<Quiz> LearnHistory(string username);
+
+
         bool DeleteQuiz(int quizID);
 
         /// <summary>

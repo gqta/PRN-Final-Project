@@ -184,5 +184,36 @@ namespace PRN_Final_Project.DAO.Impl
 
             else return true;
         }
+
+        public List<Quiz> LearnHistory(string username)
+        {
+            string sql = " with Amount as (select count(*) as amount, quizId from QuizDetail group by quizId) " +
+                "select[User].fullName, quiz.* , amount " +
+                "from[User] join Progress on[User].username = progress.username " +
+                "join Quiz on Progress.quizId = Quiz.quizId " +
+                "left join Amount on Quiz.quizId = Amount.quizId " +
+                "where Progress.username = @user order by lastLearn desc";
+            SqlParameter parameter = new SqlParameter("@user", SqlDbType.NVarChar);
+            parameter.Value = username;
+            List<Quiz> lst = new List<Quiz>();
+
+            DataTable data = GetDataBySQL(sql, parameter);
+
+            foreach (DataRow row in data.Rows)
+            {
+                lst.Add(new Quiz()
+                {
+                    Creator = row["fullName"].ToString(),
+                    QuizId = int.Parse(row["QuizId"].ToString()),
+                    QuizName = row["QuizName"].ToString(),
+                    QuizDescription = row["QuizDescription"].ToString(),
+                    CreatedDate = DateTime.Parse(row["CreatedDate"].ToString()),
+                    TermAmount = row["amount"] == null ? 0 : int.Parse(row["amount"].ToString()),
+                });
+            }
+
+
+            return lst;
+        }
     }
 }
