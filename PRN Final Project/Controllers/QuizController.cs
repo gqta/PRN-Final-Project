@@ -23,13 +23,14 @@ namespace PRN_Final_Project.Controllers
 
         public ActionResult Course()
         {
-            ViewBag.Result = new List<Quiz>();
-
 
                 
             string username = Request.Cookies["user"].Value;
 
             ViewBag.Result = new QuizDAOImpl().GetQuizByUser(username);
+            ViewBag.History = new QuizDAOImpl().LearnHistory(username);
+
+
 
 
             return View();
