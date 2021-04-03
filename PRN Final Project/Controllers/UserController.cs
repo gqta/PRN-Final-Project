@@ -188,9 +188,6 @@ Response.Cookies.Add(new HttpCookie("user", username));
                 return Redirect("/");
 
             }
-            
-
-
 
             ViewData["active"] = string.IsNullOrEmpty(username)?null:"Bạn chưa Active thành công!" ;
             return View();

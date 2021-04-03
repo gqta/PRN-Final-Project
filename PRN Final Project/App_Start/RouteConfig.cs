@@ -24,11 +24,42 @@ namespace PRN_Final_Project
                 url: "quiz/search",
                 defaults: new { controller = "Quiz", action = "Search", id = UrlParameter.Optional }
             );
+
             routes.MapRoute(
                 name: "Course",
                 url: "quiz/course",
                 defaults: new { controller = "Quiz", action = "Course", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "TestQuiz",
+                url: "quiz/test/{id}",
+                defaults: new { controller = "Quiz", action = "Test", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Learn quiz",
+                url: "quiz/learn/{id}",
+                defaults: new { controller = "Quiz", action = "Learn", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "AddQuiz",
+                 url: "quiz/add",
+                 defaults: new { controller = "Quiz", action = "Add", id = UrlParameter.Optional }
+             );
+            routes.MapRoute(
+                name: "ViewCourse",
+                url: "quiz/detail",
+                defaults: new { controller = "Quiz", action = "ViewCourse", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "EditCourse",
+                url: "quiz/edit",
+                defaults: new { controller = "Quiz", action = "EditCourse", id = UrlParameter.Optional }
+
+           );
+
+
             routes.MapRoute(
               name: "Forget Password",
               url: "user/forgotpassword",
@@ -37,7 +68,7 @@ namespace PRN_Final_Project
             routes.MapRoute(
                 name: "Login",
                 url: "login",
-                defaults: new { controller = "User", action = "Login"}
+                defaults: new { controller = "User", action = "Login" }
             );
             routes.MapRoute(
                 name: "Logout",
@@ -65,33 +96,10 @@ namespace PRN_Final_Project
                 name: "ActivationMail",
                 url: "activation",
                 defaults: new { controller = "User", action = "ActivationMail" }
+                );
 
-//                 name: "AddQuiz",
-//                 url: "quiz/add",
-//                 defaults: new { controller = "Quiz", action = "Add", id = UrlParameter.Optional }
-//             );
-//             routes.MapRoute(
-//                 name: "ViewCourse",
-//                 url: "quiz/detail",
-//                 defaults: new { controller = "Quiz", action = "ViewCourse", id = UrlParameter.Optional }
-//             );
-//             routes.MapRoute(
-//                 name: "EditCourse",
-//                 url: "quiz/edit",
-//                 defaults: new { controller = "Quiz", action = "EditCourse", id = UrlParameter.Optional }
+//                 
 
-            );
-            routes.MapRoute(
-                name: "TestQuiz",
-                url: "quiz/test/{id}",
-                defaults: new { controller = "Quiz", action = "Test", id = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
-                name: "Learn quiz",
-                url: "quiz/learn/{id}",
-                defaults: new { controller = "Quiz", action = "Learn", id = UrlParameter.Optional }
-            );
 
 
 

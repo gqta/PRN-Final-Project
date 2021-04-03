@@ -34,15 +34,11 @@
                                 }
                                 else
                                 {
-                                    <li><a href="/Quiz/Course">Thư viện của bạn</a></li>
+                                    <li><a href="/quiz/course">Thư viện của bạn</a></li>
                                     <li>
-                                        <a href="/Quiz/Add" class="quiz-add"> Học phần mới </a>
+                                        <a href="/quiz/add" class="quiz-add"> Học phần mới </a>
                                     </li>
-                                    @*<li>
-                                        Chào, @Request.Cookies["user"].Value.ToString()
 
-
-                                    </li>*@
                                     <li>
                                         <div class="dropdown">
                                             <button class="dropbtn">Chào, @Request.Cookies["user"].Value.ToString()</button>
@@ -53,7 +49,6 @@
                                         </div>
                                     </li>
 
-                                    <li>
 
                                 }
                             </ul>
