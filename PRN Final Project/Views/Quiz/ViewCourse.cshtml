@@ -87,18 +87,22 @@
                         <div class="col-sm-12 col-md-6"><h2>Thuật ngữ trong học phần(@ViewBag.Result.Count)</h2></div>
                     </div>
                     <div class="row">
-                        <br/>
+                        <div class="col-sm-12 col-md-6"> </div>
+                        <div class="col-sm-12 col-md-6">
+                            @{
+                                if (ViewBag.user.Value.ToString().Equals(new UserDAOImpl().getAccountByQuizId(ViewBag.quiz.QuizId)))
+                                {
+                                    <div class="col-sm-12 col-md-11"><a style="color : #4BB236; text-align : right;" href="~/quiz/edit?id=@ViewBag.quiz.QuizId"><h5>Chỉnh Sửa</h5></a></div>
+                                }
+                                                }
+                                            </div>
+                    </div>
                     </div>
                     <div class="row">
                         <br />
                     </div>
                 </div>
-                @{
-                    if (ViewBag.user.Value.ToString().Equals(new UserDAOImpl().getAccountByQuizId(ViewBag.quiz.QuizId)))
-                    {
-                        <div class="col-sm-12 col-md-11"><a style="color : #4BB236; text-align : right;" href="~/quiz/edit?id=@ViewBag.quiz.QuizId"><h5>Chỉnh Sửa</h5></a></div>
-                    }
-                }
+                
 
 
                 @foreach (Term term in ViewBag.Result)

@@ -47,6 +47,7 @@ namespace PRN_Final_Project.DAO
         /// <param name="terms"></param>
         /// <returns></returns>
         int AddTerms(int quizId, List<Term> terms);
+
         int AddTerm(int quizId, Term terms);
     }
 }
