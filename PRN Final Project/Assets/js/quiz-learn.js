@@ -29,7 +29,8 @@ function getQuestionByKey(terms) {
             let answer = answers[Math.round(Math.random() * (answers.length - 1))]; // lấy ra 1 đáp án ngẫu nhiên của phần từ answers list
 
             if (quizAnswers.indexOf(answer) == -1) {
-                if (Math.round(Math.random)) {
+
+                if (Math.round(Math.random())==1) {
                     quizAnswers.push(answer);
                 } else {
                     quizAnswers.unshift(answer);
@@ -73,7 +74,7 @@ function getQuestionByDefinition(terms) {
             let answer = answers[Math.round(Math.random() * (answers.length - 1))]; // lấy ra 1 đáp án ngẫu nhiên của phần từ answers list
 
             if (quizAnswers.indexOf(answer) == -1) {
-                if (Math.round(Math.random)) {
+                if (Math.round(Math.random())==1) {
                     quizAnswers.push(answer);
                 } else {
                     quizAnswers.unshift(answer);
@@ -142,8 +143,10 @@ function answer(el) {
         $("#quiz-modal-result").css("color", "white");
     }
 
-    $("#quiz-result").text(`${current * 100.0 / quiz.length}%`)
-
+    $("#quiz-result").text(`${Math.round(current * 100.0 / quiz.length)}%`)
+    $(".quiz-type").change((el) => {
+        console.log(el.target.value)
+    });
 
     $("#result").show();
 

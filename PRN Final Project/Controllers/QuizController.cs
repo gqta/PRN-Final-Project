@@ -21,6 +21,7 @@ namespace PRN_Final_Project.Controllers
             return View();
         }
 
+
         public ActionResult Course()
         {
 
@@ -35,6 +36,38 @@ namespace PRN_Final_Project.Controllers
 
             return View();
 
+        }
+
+
+        public ActionResult DeleteQuiz()
+        {
+            QuizDAO quizDao = new QuizDAOImpl();
+            string user = Request.Cookies["user"] == null ? "" : Request.Cookies["user"].Value;
+            try
+            {
+                if (!String.IsNullOrEmpty(Request["id"]) && quizDao.CanAccess(user, Convert.ToInt32(Request["id"])))
+                {
+                    ViewBag.user = Request.Cookies["user"];
+
+                    if (quizDao.DeleteQuiz(int.Parse(Request["id"])))
+                    {
+                        return Redirect("/quiz/course");
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch
+            {
+                return Redirect("/error/404");
+            }
         }
         public ActionResult ViewCourse()
         {
@@ -165,7 +198,7 @@ namespace PRN_Final_Project.Controllers
                 {
                     int result = termDAO.AddTerm(quizId, x);
                 }
-                return Redirect("~/quiz/add");
+                return Redirect("~/quiz/course");
 
 
             }

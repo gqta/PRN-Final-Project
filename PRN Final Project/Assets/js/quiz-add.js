@@ -10,11 +10,11 @@ function getAddField(index) {
     </div>
     <div class="row">
         <div class="col-sm-12 col-md-6 quiz-add-input-field">
-            <input type="text" name="key" placeholder="" value="">
+            <input type="text" name="key" placeholder="" required>
             <label for="">Thuật ngữ</label>
         </div>
         <div class="col-sm-12 col-md-6 quiz-add-input-field">
-            <input type="text" name="value" placeholder="" value="">
+            <input type="text" name="value" placeholder="" required>
             <label for="">Định nghĩa</label>
         </div>
     </div>
@@ -35,16 +35,16 @@ function getAddField(index, term, definition) {
             <h3>${index}</h3>
         </div>
         <div class="col-sm-12 col-md-6 quiz-item-delete">
-            <button disabled title="Xóa thuật ngữ"><i class="fas fa-trash-alt"></i></button>
+            <div title="Xóa thuật ngữ" onclick="rebone(this)" style="float: right;"><i class="fas fa-trash-alt"></i></div>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12 col-md-6 quiz-add-input-field">
-            <input type="text" name="" placeholder="" value="${term}">
+            <input type="text" name="key" placeholder="" value="${term}" required>
             <label for="">Thuật ngữ</label>
         </div>
         <div class="col-sm-12 col-md-6 quiz-add-input-field">
-            <input type="text" name="" placeholder="" value="${definition}">
+            <input type="text" name="value" placeholder="" value="${definition}" required>
             <label for="">Định nghĩa</label>
         </div>
     </div>
@@ -92,20 +92,38 @@ $(document).ready(() => {
         let amount = document.getElementsByClassName("quiz-add-item").length + 1;
         $("#term-amount").text(amount);
         $("#quiz-add-container").append(getAddField(amount, "", ""));
+        if (document.getElementsByClassName("quiz-add-item").length <= 2) {
+            $(".quiz-item-delete").hide();
+        } else {
+            $(".quiz-item-delete").show();
+        }
     })
 
     if (document.getElementsByClassName("quiz-add-item").length <= 2) {
-         $(".quiz-item-delete").hide();
+        $(".quiz-item-delete").hide();
     } else {
-        $(".quiz-item-delete").enable();
+        $(".quiz-item-delete").show();
     }
-})
+});
+
+
+window.onloadeddata = () => {
+    if (document.getElementsByClassName("quiz-add-item").length <= 2) {
+        $(".quiz-item-delete").hide();
+    } else {
+        $(".quiz-item-delete").show();
+    }
+}
 
 
 function rebone(el) {
 
-    console.log(el.parentNode.parentNode.parentNode.remove());
-
+    el.parentNode.parentNode.parentNode.remove();
+    if (document.getElementsByClassName("quiz-add-item").length <= 2) {
+        $(".quiz-item-delete").hide();
+    } else {
+        $(".quiz-item-delete").show();
+    }
 }
 
 
