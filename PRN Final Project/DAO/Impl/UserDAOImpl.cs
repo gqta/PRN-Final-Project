@@ -55,29 +55,28 @@ namespace PRN_Final_Project.DAO.Impl
         public string ForgotPassword(string username, string email)
         {
 
-            //string sql = "select * from [User] where username = @user and email = @email";
+            string sql = "select * from [User] where username = @user and email = @email";
 
-            //SqlParameter[] parameter = new SqlParameter[]
-            //{
-            //    new SqlParameter("@user", SqlDbType.VarChar),
-            //    new SqlParameter("@email", SqlDbType.VarChar),
-            //};
+            SqlParameter[] parameter = new SqlParameter[]
+            {
+                new SqlParameter("@user", SqlDbType.VarChar),
+                new SqlParameter("@email", SqlDbType.VarChar),
+            };
 
-            //parameter[0].Value = username;
-            //parameter[1].Value = email;
+            parameter[0].Value = username;
+            parameter[1].Value = email;
 
-            //string randomPass = getRandomPass();
+            string randomPass = getRandomPass();
 
-            //if(GetDataBySQL(sql, parameter).Rows.Count > 0 && ChangePassword(username, randomPass))
-            //{
-            //     return randomPass;
+            if (GetDataBySQL(sql, parameter).Rows.Count > 0 && ChangePassword(username, randomPass))
+            {
+                return randomPass;
 
-            //}
-            //else
-            //{
-            //    return null;
-            //}
-            return null;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public string getRandomPass()

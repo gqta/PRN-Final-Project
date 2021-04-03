@@ -178,9 +178,10 @@ namespace PRN_Final_Project.Controllers
         public ActionResult Learn(int id)
         {
             string username = Request.Cookies["user"] == null ? null : Request.Cookies["user"].Value;
-
+            
             if (new QuizDAOImpl().CanAccess(username, id))
             {
+                ViewBag.ID = id;
                 if (String.IsNullOrEmpty(username))
                 {
                     ViewBag.apiLink = String.Format("/api/quiz/{0}", id);

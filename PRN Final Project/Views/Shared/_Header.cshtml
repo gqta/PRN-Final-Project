@@ -25,10 +25,10 @@
                                 @if (Request.Cookies["user"] == null || String.IsNullOrEmpty(Request.Cookies["user"].Value))
                                 {
                                     <li>
-                                        <a href="~/login" class="btn header-btn2">Đăng nhập</a>
+                                        <a href="/login" class="btn header-btn2">Đăng nhập</a>
                                     </li>
                                     <li>
-                                        <a href="~/register" class="btn header-btn2">Đăng ký</a>
+                                        <a href="/register" class="btn header-btn2">Đăng ký</a>
 
                                     </li>
                                 }
@@ -43,8 +43,8 @@
                                         <div class="dropdown">
                                             <button class="dropbtn">Chào, @Request.Cookies["user"].Value.ToString()</button>
                                             <div class="dropdown-content">
-                                                <a href="~/changepassword">Change Password</a>
-                                                <a href="~/logout">Logout</a>
+                                                <a href="/changepassword">Change Password</a>
+                                                <a href="/logout">Logout</a>
                                             </div>
                                         </div>
                                     </li>
